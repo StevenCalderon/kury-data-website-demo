@@ -1,0 +1,21 @@
+---
+import styles from './Button.module.css';
+
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary';
+  class?: string;
+}
+
+const { href, variant = 'primary', class: className = '' } = Astro.props;
+
+const Element = href ? 'a' : 'button';
+const variantClass = variant === 'secondary' ? styles.secondary : styles.primary;
+---
+
+<Element 
+  href={href}
+  class={`${styles.button} ${variantClass} ${className}`}
+>
+  <slot />
+</Element>

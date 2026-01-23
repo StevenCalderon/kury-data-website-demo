@@ -1,0 +1,13 @@
+---
+import styles from './IndustryBadge.module.css';
+
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class={styles.badge}>
+  {label}
+</div>
