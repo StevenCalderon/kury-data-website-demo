@@ -1,0 +1,308 @@
+---
+// ContactForm.astro
+import styles from './ContactForm.module.css';
+---
+
+<section class={styles.section} id="contact-form">
+  <div class={styles.container}>
+    
+    <!-- Ilustración del lado izquierdo -->
+    <div class={styles.leftColumn}>
+      <img 
+        src="/images/ilustracion.png" 
+        alt="Ilustración de contacto" 
+        class={styles.illustration}
+      />
+    </div>
+
+    <!-- Columna del formulario -->
+    <div class={styles.formColumn}>
+      
+      <!-- Encabezado -->
+      <div class={styles.heading}>
+        <h2 class={styles.title}>
+          Hablemos de tu próximo<br />gran proyecto
+        </h2>
+        <p class={styles.description}>
+          Cuéntanos qué tienes en mente y nuestro equipo técnico se pondrá en contacto contigo para definir la hoja de ruta.
+        </p>
+      </div>
+
+      <!-- Formulario de contacto -->
+      <form class={styles.form} id="contactForm">
+        
+        <!-- Campo: Nombre -->
+        <div class={styles.formGroup}>
+          <label for="name" class={styles.label}>Nombre</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Ej: Juan Pérez"
+            class={styles.input}
+            required
+          />
+        </div>
+
+        <!-- Fila: Empresa y Presupuesto -->
+        <div class={styles.formRow}>
+          <div class={styles.formGroup}>
+            <label for="company" class={styles.label}>
+              Nombre de tu Empresa / Startup
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              placeholder="Ej: TechSolutions Inc."
+              class={styles.input}
+              required
+            />
+          </div>
+
+          <div class={styles.formGroup}>
+            <label for="budget" class={styles.label}>
+              Presupuesto estimado (USD)
+            </label>
+            <select id="budget" name="budget" class={styles.select}>
+              <option value="" disabled selected hidden>1000 - 5000</option>
+              <option value="">Desmarcar valor</option>
+              <option value="1000-5000">1000 - 5000</option>
+              <option value="5000-10000">5000 - 10000</option>
+              <option value="10000-25000">10000 - 25000</option>
+              <option value="25000-50000">25000 - 50000</option>
+              <option value="50000+">50000+</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Campo: Mensaje -->
+        <div class={styles.formGroup}>
+          <label for="message" class={styles.label}>
+            Cuéntanos brevemente sobre el proyecto
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Necesito una API para integrar pagos..."
+            class={styles.textarea}
+            required
+          ></textarea>
+          
+          <!-- Mensaje de validación (siempre visible, reserva espacio) -->
+          <p class={styles.validationMessage} id="statusMessage">
+            You must choose a name
+          </p>
+        </div>
+
+        <!-- Botón de envío -->
+        <button type="submit" class={styles.submitButton} id="submitBtn">
+          Enviar Mensaje
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Script para cargar EmailJS desde CDN -->
+<script is:inline>
+  (function() {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    script.async = true;
+    
+    script.onload = function() {
+      console.log('✅ EmailJS cargado correctamente');
+      if (window.emailjs) {
+        window.emailjs.init('3OPggN4cWjl6Id46M');
+      }
+    };
+    
+    script.onerror = function() {
+      console.error('❌ Error al cargar EmailJS');
+    };
+    
+    document.head.appendChild(script);
+  })();
+</script>
+
+<script>
+  // Configuración de EmailJS
+  const EMAILJS_SERVICE_ID = 'service_5xi29ht'; 
+  const EMAILJS_TEMPLATE_ID = 'template_momh07h';
+
+  // Elementos del DOM
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const budgetSelect = document.getElementById('budget') as HTMLSelectElement;
+  const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+  const statusMessage = document.getElementById('statusMessage') as HTMLParagraphElement;
+
+  // Función para eliminar el fondo azul del autocompletado del navegador
+  function removeAutofillStyles() {
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach((input) => {
+      const element = input as HTMLElement;
+      element.style.backgroundColor = 'transparent';
+      element.style.backgroundImage = 'none';
+      element.style.transition = 'none';
+      
+      // Restaurar transición después de aplicar los estilos
+      setTimeout(() => {
+        element.style.transition = 'all 0.3s ease';
+      }, 10);
+    });
+  }
+
+  // Ejecutar al cargar la página y cuando el usuario interactúa con los campos
+  document.addEventListener('DOMContentLoaded', removeAutofillStyles);
+  setTimeout(removeAutofillStyles, 100);
+  setTimeout(removeAutofillStyles, 500);
+
+  const allInputs = document.querySelectorAll('input, textarea');
+  allInputs.forEach((input) => {
+    input.addEventListener('focus', removeAutofillStyles);
+    input.addEventListener('blur', removeAutofillStyles);
+  });
+
+  // Cambiar color del select cuando el usuario elige una opción
+  budgetSelect?.addEventListener('change', () => {
+    if (budgetSelect.value === '') {
+      budgetSelect.selectedIndex = 0;
+      budgetSelect.style.color = 'var(--color-gray-500)';
+    } else {
+      budgetSelect.style.color = 'var(--color-white)';
+    }
+  });
+
+  // Esperar a que EmailJS esté disponible
+  function waitForEmailJS(maxAttempts = 20): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let attempts = 0;
+      
+      const checkEmailJS = setInterval(() => {
+        attempts++;
+        
+        if ((window as any).emailjs) {
+          clearInterval(checkEmailJS);
+          console.log('✅ EmailJS listo para usar');
+          resolve((window as any).emailjs);
+        } else if (attempts >= maxAttempts) {
+          clearInterval(checkEmailJS);
+          reject(new Error('EmailJS no se cargó después de ' + maxAttempts + ' intentos'));
+        }
+      }, 200);
+    });
+  }
+
+  // Función para enviar el email usando EmailJS
+  async function sendEmail(formData: FormData) {
+    // Preparar los datos del formulario para el template de EmailJS
+    const templateParams = {
+      from_name: formData.get('name'),
+      from_company: formData.get('company'),
+      budget: formData.get('budget') || 'No especificado',
+      message: formData.get('message'),
+      timestamp: new Date().toLocaleString('es-ES')
+    };
+
+    console.log('📧 Enviando email...');
+
+    try {
+      // Esperar a que EmailJS esté disponible
+      const emailjs = await waitForEmailJS();
+      
+      // Enviar el email
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams
+      );
+
+      console.log('✅ Email enviado:', response);
+      return { success: true, response };
+    } catch (error: any) {
+      console.error('❌ Error al enviar:', error);
+      
+      let errorMessage = 'Error desconocido';
+      if (error.text) errorMessage = error.text;
+      
+      return { success: false, error, errorMessage };
+    }
+  }
+
+  // Manejar el envío del formulario
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    console.log('🚀 Formulario enviado');
+    
+    // Deshabilitar botón para evitar envíos múltiples
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    
+    // Limpiar mensaje y mostrar estado de envío
+    statusMessage.textContent = '';
+    statusMessage.style.color = '#596387';
+
+    // Obtener datos del formulario
+    const formData = new FormData(form);
+
+    // Enviar el email
+    const result = await sendEmail(formData);
+
+    if (result.success) {
+      // Mostrar mensaje de éxito
+      statusMessage.textContent = '✓ Mensaje enviado correctamente';
+      statusMessage.style.color = '#10b981';
+      
+      console.log('🎉 Envío exitoso');
+      
+      // Limpiar formulario
+      form.reset();
+      
+      // Resetear el select de presupuesto
+      if (budgetSelect) {
+        budgetSelect.selectedIndex = 0;
+        budgetSelect.style.color = 'var(--color-gray-500)';
+      }
+      
+      // Limpiar estilos de autofill
+      setTimeout(removeAutofillStyles, 50);
+      
+      // Volver al mensaje inicial después de 5 segundos
+      setTimeout(() => {
+        statusMessage.textContent = 'You must choose a name';
+        statusMessage.style.color = '#596387';
+      }, 5000);
+    } else {
+      // Mostrar mensaje de error
+      statusMessage.textContent = '✗ Error al enviar. Revisa la consola (F12)';
+      statusMessage.style.color = '#ef4444';
+      
+      console.error('💥 Envío fallido');
+      console.error('🔍 Verifica:');
+      console.error('   - SERVICE_ID correcto');
+      console.error('   - TEMPLATE_ID correcto');
+      console.error('   - Configuración en https://dashboard.emailjs.com/');
+      
+      // Volver al mensaje inicial después de 5 segundos
+      setTimeout(() => {
+        statusMessage.textContent = 'You must choose a name';
+        statusMessage.style.color = '#596387';
+      }, 5000);
+    }
+
+    // Rehabilitar botón
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar Mensaje';
+  });
+</script>
+
+<style>
+  /* Estilo para botón deshabilitado */
+  #submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+</style>
