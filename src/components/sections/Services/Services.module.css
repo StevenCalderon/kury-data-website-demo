@@ -1,14 +1,308 @@
+
 .section {
-  padding: var(--spacing-24) var(--spacing-6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 300px;
-  border-bottom: 1px solid var(--color-white-5);
+  width: 100%;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(39, 2, 250, 0.952) 0%, rgb(0, 1, 87) 15%);
+  background: linear-gradient(180deg, #0a1628 0%, rgba(37, 8, 204, 0.952) 39%, #0a1628 100%);
+}
+
+/* Efecto de profundidad*/
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* Contenedor del título */
+.worldImage {
+  background-image: url('/images/world.svg');
+  background-repeat: no-repeat;
+  padding: 200px;
+  width: 78%;
+  margin-left: 250px;
+}
+.titleContainer {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 24px;
+  text-align: center;
 }
 
 .title {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-gray-400);
+  font-size: 40px;
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.descriptionServices {
+  font-size: 20px;
+  font-weight: var(--font-weight-normal, 400);
+  line-height: 1.6;
+  letter-spacing: 0;
+  text-align: center;
+  color: #FFFFFF;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Wrapper del carrusel */
+.carouselWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+/* Contenedor del carrusel con overflow oculto */
+.carouselContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+/* Track del carrusel (contiene todas las tarjetas) */
+.carouselTrack {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform; /* Optimización de rendimiento para animaciones */
+}
+
+/* Tarjeta de servicio individual */
+.serviceCard {
+  flex: 0 0 calc((100% - 72px) / 4); /* 4 tarjetas por vista: (100% - 3 gaps de 24px) / 4 */
+  min-width: 0; 
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.serviceCard::after {
+  content: "";
+  position: absolute;
+  width: 170%;
+  height: 140%;
+  left: 50%;
+  bottom: -105%;
+
+  transform: translateX(-50%);
+  border-radius: 50%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(56, 191, 248, 0.226) 0%,
+    #05a3cabe 25%,
+    #00e7f7 50%,
+    #56FFF9 80%,
+    #56fff9 100%
+  );
+
+  /* background: linear-gradient(
+    180deg,
+    rgba(56, 189, 248, 0) 0%,
+    rgba(56, 189, 248, 0.2) 25%,
+    rgba(1, 124, 240, 0.5) 50%,
+    rgba(1, 124, 240, 0.8) 75%,
+    rgba(1, 124, 240, 1) 100%
+  ); */
+}
+
+/* Efecto hover sutil para mejorar la interacción */
+.serviceCard:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(35px) saturate(200%);
+  -webkit-backdrop-filter: blur(35px) saturate(200%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+              0 0 60px rgba(86, 255, 249, 0.1);
+  border-color: rgba(86, 255, 249, 0.4);
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  z-index: 1;
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #56FFF9;
+  ;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.cardDescription {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  text-align: left;
+  flex: 1;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.5rem;
+  background: transparent;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cardImage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(64, 224, 208, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(64, 224, 208, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(64, 224, 208, 0.2));
+}
+
+/* Contenedor de paginación (puntos) */
+.carouselPagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* Puntos de paginación */
+.paginationDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  position: relative;
+}
+
+/* Estado activo del punto */
+.paginationDot.active,
+.paginationDot[aria-current="true"] {
+  background: #ffffff;
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* Hover en los puntos */
+.paginationDot:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
+}
+
+/* Responsive: Tablet */
+@media (max-width: 1024px) {
+  .serviceCard {
+    flex: 0 0 calc((100% - 48px) / 3); /* 3 tarjetas por vista: (100% - 2 gaps de 24px) / 3 */
+  }
+  
+  .title {
+    font-size: 36px;
+  }
+  
+  .descriptionServices {
+    font-size: 18px;
+  }
+}
+
+/* Responsive: Mobile */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+  
+  .serviceCard {
+    flex: 0 0 calc((100% - 24px) / 2); /* 2 tarjetas por vista: (100% - 1 gap de 24px) / 2 */
+  }
+  
+  .title {
+    font-size: 28px;
+  }
+  
+  .descriptionServices {
+    font-size: 16px;
+  }
+  
+  .cardTitle {
+    font-size: 20px;
+  }
+  
+  .cardDescription {
+    font-size: 13px;
+  }
+  
+  .cardImage {
+    height: 150px;
+  }
+}
+
+/* Responsive: Mobile pequeño */
+@media (max-width: 480px) {
+  .serviceCard {
+    flex: 0 0 100%; /* 1 tarjeta por vista */
+  }
+  
+  .carouselTrack {
+    gap: 16px;
+  }
+  
+  .serviceCard {
+    padding: 24px 16px;
+  }
 }

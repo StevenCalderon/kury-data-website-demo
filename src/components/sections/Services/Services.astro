@@ -1,7 +1,202 @@
 ---
 import styles from './Services.module.css';
+
+const services = [
+    {
+        id: 1,
+        name: "Diseño UX / UI Premium",
+        description: "Diseñamos interfaces intuitivas mediante una investigación rigurosa de usabilidad para maximizar las tasas de conversión y la participación del usuario en todas tus plataformas digitales.",
+        image: "/images/UI-carousel.svg",
+    },
+    {
+        id: 2,
+        name: "Inteligencia Artificial Aplicada",
+        description: "Integramos modelos avanzados de Machine Learning para automatizar flujos de trabajo, transformando datos en bruto en información predictiva para una toma de decisiones operativas más inteligente.",
+        image: "/images/AI-carousel.svg",
+    },
+    {
+        id: 3,
+        name: "Arquitectura Cloud y DevOps",
+        description: "Diseñamos infraestructuras en la nube escalables y de alta disponibilidad, garantizando la integridad de los datos y la implementación continua bajo cargas empresariales exigentes.",
+        image: "/images/devOps-carousel.svg",
+    },
+    {
+        id: 4,
+        name: "Soluciones Blockchain y Web3",
+        description: "Desarrollamos contratos inteligentes y aplicaciones descentralizadas seguras, aprovechando la tecnología de registros distribuidos para ofrecer seguridad criptográfica en las transacciones.",
+        image: "/images/Blockchain-carousel.svg",
+    },
+    {
+        id: 5,
+        name: "Big Data y Analítica",
+        description: "Construimos pipelines de datos de alto rendimiento para procesar grandes volúmenes de información, proporcionando herramientas avanzadas de visualización para extraer insights estratégicos de negocio.",
+        image: "/images/Data-carousel.svg"
+    },
+    {
+        id: 6,
+        name: "Ecosistemas de APIs a Medida",
+        description: "Diseñamos APIs RESTful y GraphQL robustas para un intercambio de datos seguro, sincronizando eficientemente tu arquitectura de software con plataformas de terceros.",
+        image: "/images/API-carousel.svg",
+    }
+];
+
+// Calculamos cuántos grupos de 4 servicios tenemos
+const cardsPerView = 4;
+const totalGroups = Math.ceil(services.length / cardsPerView);
+const paginationGroups = Array.from({ length: totalGroups }, (_, i) => i);
 ---
 
-<section class={styles.section}>
-  <h2 class={styles.title}>Services</h2>
+<section id={styles.presentationServices} class={styles.section}>
+  <div class={styles.worldImage}>
+  </div>
+  <div class={styles.titleContainer}>
+    <h2 class={styles.title}>Diseñamos la Próxima Generación de Software</h2>
+    <p class={styles.descriptionServices}>
+      Conectamos los desafíos empresariales complejos con soluciones digitales escalables, utilizando arquitecturas de vanguardia para construir hoy el futuro de tu empresa.
+    </p>
+  </div>
+
+  <div class={styles.carouselWrapper}>
+    <div class={styles.carouselContainer} id="carousel-container">
+      <div class={styles.carouselTrack} id="carousel-track">
+        {services.map((service) => (
+          <div class={styles.serviceCard} key={service.id}>
+            <div class={styles.cardContent}>
+              <h3 class={styles.cardTitle}>{service.name}</h3>
+              <p class={styles.cardDescription}>{service.description}</p>
+            </div>
+            <div class={styles.cardImage}>
+              <img src={service.image} alt={service.name} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <div class={styles.carouselPagination} id="carousel-pagination">
+      {paginationGroups.map((groupIndex) => (
+        <button
+          class={styles.paginationDot}
+          data-group={groupIndex}
+          aria-label={`Ir al grupo ${groupIndex + 1}`}
+          aria-current={groupIndex === 0 ? 'true' : 'false'}
+        ></button>
+      ))}
+    </div>
+  </div>
 </section>
+
+<script>
+  // Inicializamos el carrusel cuando el DOM esté completamente cargado
+  // Usamos una función auto-ejecutable para evitar contaminar el scope global
+  (function initCarousel() {
+    // Esperamos a que el DOM esté listo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCarousel);
+      return;
+    }
+    
+    const container = document.getElementById('carousel-container');
+    const track = document.getElementById('carousel-track');
+    const dots = document.querySelectorAll('[data-group]');
+    
+    if (!container || !track || dots.length === 0) return;
+    
+    let currentGroup = 0;
+    const totalGroups = dots.length;
+    const cardsPerView = 4; // Mostramos 4 tarjetas a la vez según el diseño
+    const gap = 24; // Gap entre tarjetas (debe coincidir con el CSS)
+    const totalCards = track.children.length;
+    
+    // Función para calcular el ancho de una tarjeta
+    function getCardWidth() {
+      const firstCard = track.children[0];
+      if (!firstCard) return 0;
+      return firstCard.offsetWidth;
+    }
+    
+    // Función para calcular el desplazamiento de un grupo
+    // Implementa solapamiento: si el último grupo tiene menos de 4 servicios,
+    // se rellenan con los últimos servicios del grupo anterior
+    function getGroupOffset(groupIndex) {
+      const cardWidth = getCardWidth();
+      if (cardWidth === 0) return 0;
+      
+      let startIndex;
+      
+      // Calculamos cuántos servicios quedan desde este grupo hasta el final
+      const remainingCards = totalCards - (groupIndex * cardsPerView);
+      
+      // Si quedan menos de 4 servicios, aplicamos solapamiento
+      // para rellenar con los últimos servicios del grupo anterior
+      if (remainingCards < cardsPerView && groupIndex > 0) {
+        // El último grupo siempre muestra las últimas 4 tarjetas
+        startIndex = totalCards - cardsPerView;
+      } else {
+        // Grupos completos: cada grupo comienza en su índice normal
+        startIndex = groupIndex * cardsPerView;
+      }
+      
+      const slideDistance = cardWidth + gap;
+      return startIndex * slideDistance;
+    }
+    
+    // Función para actualizar la posición del carrusel
+    function updateCarousel() {
+      const cardWidth = getCardWidth();
+      if (cardWidth === 0) {
+        // Si aún no se ha calculado el ancho, reintentamos después de un breve delay
+        setTimeout(updateCarousel, 100);
+        return;
+      }
+      
+      // Calculamos el desplazamiento para el grupo actual
+      const translateX = getGroupOffset(currentGroup);
+      
+      // Aplicamos la transformación con una transición suave
+      track.style.transform = `translateX(-${translateX}px)`;
+      track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      
+      // Actualizamos los indicadores de paginación
+      dots.forEach((dot, index) => {
+        const isActive = index === currentGroup;
+        dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+        if (isActive) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+    
+    // Event listeners para los puntos de paginación
+    dots.forEach((dot) => {
+      const groupIndex = parseInt(dot.getAttribute('data-group'), 10);
+      dot.addEventListener('click', () => {
+        currentGroup = groupIndex;
+        updateCarousel();
+      });
+    });
+    
+    // Auto-play opcional :el carrusel avanza automáticamente
+    /*
+    setInterval(() => {
+      currentGroup = (currentGroup + 1) % totalGroups;
+      updateCarousel();
+    }, 5000);
+    */
+    
+    setTimeout(() => {
+      updateCarousel();
+    }, 100);
+    
+    // Manejo de redimensionamiento de ventana con debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        updateCarousel();
+      }, 250);
+    });
+  })();
+</script>
