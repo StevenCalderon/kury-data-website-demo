@@ -4,8 +4,6 @@
   padding: 80px 0;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at center, rgba(39, 2, 250, 0.952) 0%, rgb(0, 1, 87) 15%);
-  background: linear-gradient(180deg, #0a1628 0%, rgba(37, 8, 204, 0.952) 39%, #0a1628 100%);
 }
 
 /* Efecto de profundidad*/
@@ -19,14 +17,20 @@
   pointer-events: none;
 }
 
-/* Contenedor del título */
 .worldImage {
+  max-width: 800px;
+  margin: 0 auto -304px;
+  padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+  aspect-ratio: 920 / 734;
+  min-height: 120px;
   background-image: url('/images/world.svg');
   background-repeat: no-repeat;
-  padding: 200px;
-  width: 78%;
-  margin-left: 250px;
+  background-position: center;
+  background-size: contain;
 }
+
 .titleContainer {
   max-width: 1200px;
   margin: 0 auto 60px;
@@ -63,7 +67,6 @@
   position: relative;
 }
 
-/* Contenedor del carrusel con overflow oculto */
 .carouselContainer {
   width: 100%;
   overflow: hidden;
@@ -71,74 +74,94 @@
   margin-bottom: 40px;
 }
 
-/* Track del carrusel (contiene todas las tarjetas) */
 .carouselTrack {
   display: flex;
   gap: 24px;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform; /* Optimización de rendimiento para animaciones */
+  will-change: transform; 
 }
 
-/* Tarjeta de servicio individual */
+/* Tarjeta de servicios: individual */
 .serviceCard {
   flex: 0 0 calc((100% - 72px) / 4); /* 4 tarjetas por vista: (100% - 3 gaps de 24px) / 4 */
   min-width: 0; 
-  background: rgba(255, 255, 255, 0.05);
+
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
+
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
+
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
+
   position: relative;
   overflow: hidden;
+
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
               0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s ease,
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
 }
 
 .serviceCard::after {
   content: "";
   position: absolute;
+
   width: 170%;
   height: 140%;
   left: 50%;
   bottom: -105%;
-
   transform: translateX(-50%);
+
   border-radius: 50%;
 
   background: linear-gradient(
     180deg,
     rgba(56, 191, 248, 0.226) 0%,
-    #05a3cabe 25%,
-    #00e7f7 50%,
-    #56FFF9 80%,
+    #56fff9 25%,
+    #36a8b0 55%,
+    #36d2cd 75%,
     #56fff9 100%
   );
 
-  /* background: linear-gradient(
-    180deg,
-    rgba(56, 189, 248, 0) 0%,
-    rgba(56, 189, 248, 0.2) 25%,
-    rgba(1, 124, 240, 0.5) 50%,
-    rgba(1, 124, 240, 0.8) 75%,
-    rgba(1, 124, 240, 1) 100%
-  ); */
+  z-index: 0;
 }
 
-/* Efecto hover sutil para mejorar la interacción */
-.serviceCard:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(35px) saturate(200%);
-  -webkit-backdrop-filter: blur(35px) saturate(200%);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
-              0 0 0 1px rgba(255, 255, 255, 0.1) inset,
-              0 0 60px rgba(86, 255, 249, 0.1);
-  border-color: rgba(86, 255, 249, 0.4);
+.serviceCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  background: radial-gradient(
+    circle at bottom,
+    #56fff9d7,
+    transparent 80%
+  );
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+  pointer-events: none;
+  z-index: 1;
 }
+
+.serviceCard:hover {
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  border-color: rgba(86, 255, 249, 0.6);
+}
+
+.serviceCard:hover::before {
+  opacity: 1;
+}
+
 
 .cardContent {
   flex: 1;
@@ -209,7 +232,6 @@
   filter: drop-shadow(0 4px 8px rgba(64, 224, 208, 0.2));
 }
 
-/* Contenedor de paginación (puntos) */
 .carouselPagination {
   display: flex;
   justify-content: center;
@@ -231,7 +253,6 @@
   position: relative;
 }
 
-/* Estado activo del punto */
 .paginationDot.active,
 .paginationDot[aria-current="true"] {
   background: #ffffff;
@@ -240,7 +261,6 @@
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
-/* Hover en los puntos */
 .paginationDot:hover {
   background: rgba(255, 255, 255, 0.6);
   transform: scale(1.2);
@@ -259,6 +279,7 @@
   .descriptionServices {
     font-size: 18px;
   }
+  
 }
 
 /* Responsive: Mobile */
@@ -290,6 +311,7 @@
   .cardImage {
     height: 150px;
   }
+  
 }
 
 /* Responsive: Mobile pequeño */
@@ -305,4 +327,5 @@
   .serviceCard {
     padding: 24px 16px;
   }
+  
 }

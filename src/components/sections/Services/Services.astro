@@ -40,10 +40,6 @@ const services = [
     }
 ];
 
-// Calculamos cuántos grupos de 4 servicios tenemos
-const cardsPerView = 4;
-const totalGroups = Math.ceil(services.length / cardsPerView);
-const paginationGroups = Array.from({ length: totalGroups }, (_, i) => i);
 ---
 
 <section id={styles.presentationServices} class={styles.section}>
@@ -60,7 +56,7 @@ const paginationGroups = Array.from({ length: totalGroups }, (_, i) => i);
     <div class={styles.carouselContainer} id="carousel-container">
       <div class={styles.carouselTrack} id="carousel-track">
         {services.map((service) => (
-          <div class={styles.serviceCard} key={service.id}>
+          <div class={styles.serviceCard}>
             <div class={styles.cardContent}>
               <h3 class={styles.cardTitle}>{service.name}</h3>
               <p class={styles.cardDescription}>{service.description}</p>
@@ -73,129 +69,135 @@ const paginationGroups = Array.from({ length: totalGroups }, (_, i) => i);
       </div>
     </div>
     
-    <div class={styles.carouselPagination} id="carousel-pagination">
-      {paginationGroups.map((groupIndex) => (
-        <button
-          class={styles.paginationDot}
-          data-group={groupIndex}
-          aria-label={`Ir al grupo ${groupIndex + 1}`}
-          aria-current={groupIndex === 0 ? 'true' : 'false'}
-        ></button>
-      ))}
+    <div
+      class={styles.carouselPagination}
+      id="carousel-pagination"
+      aria-live="polite"
+      data-dot-class={styles.paginationDot}
+    >
     </div>
   </div>
 </section>
 
 <script>
-  // Inicializamos el carrusel cuando el DOM esté completamente cargado
-  // Usamos una función auto-ejecutable para evitar contaminar el scope global
   (function initCarousel() {
-    // Esperamos a que el DOM esté listo
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initCarousel);
       return;
     }
-    
+
     const container = document.getElementById('carousel-container');
-    const track = document.getElementById('carousel-track');
-    const dots = document.querySelectorAll('[data-group]');
-    
-    if (!container || !track || dots.length === 0) return;
-    
-    let currentGroup = 0;
-    const totalGroups = dots.length;
-    const cardsPerView = 4; // Mostramos 4 tarjetas a la vez según el diseño
-    const gap = 24; // Gap entre tarjetas (debe coincidir con el CSS)
+    const trackNode = document.getElementById('carousel-track');
+    const paginationNode = document.getElementById('carousel-pagination');
+    if (!container || !trackNode || !paginationNode) return;
+
+    const track = trackNode as HTMLElement;
+    const paginationEl = paginationNode as HTMLElement;
     const totalCards = track.children.length;
-    
-    // Función para calcular el ancho de una tarjeta
-    function getCardWidth() {
-      const firstCard = track.children[0];
-      if (!firstCard) return 0;
-      return firstCard.offsetWidth;
+
+    // Breakpoints y cantidad detarjetas caben por vista
+    function getViewportConfig() {
+      const w = window.innerWidth;
+      if (w <= 480) return { cardsPerView: 1, gap: 16 };
+      if (w <= 768) return { cardsPerView: 2, gap: 24 };
+      if (w <= 1024) return { cardsPerView: 3, gap: 24 };
+      return { cardsPerView: 4, gap: 24 };
     }
-    
-    // Función para calcular el desplazamiento de un grupo
-    // Implementa solapamiento: si el último grupo tiene menos de 4 servicios,
-    // se rellenan con los últimos servicios del grupo anterior
-    function getGroupOffset(groupIndex) {
+
+    let currentGroup = 0;
+    let config = getViewportConfig();
+
+    function getCardWidth(): number {
+      const firstCard = track.children[0] as HTMLElement | undefined;
+      return firstCard ? firstCard.offsetWidth : 0;
+    }
+
+    function getGroupOffset(groupIndex: number, cardsPerView: number, gapPx: number): number {
       const cardWidth = getCardWidth();
       if (cardWidth === 0) return 0;
-      
-      let startIndex;
-      
-      // Calculamos cuántos servicios quedan desde este grupo hasta el final
-      const remainingCards = totalCards - (groupIndex * cardsPerView);
-      
-      // Si quedan menos de 4 servicios, aplicamos solapamiento
-      // para rellenar con los últimos servicios del grupo anterior
-      if (remainingCards < cardsPerView && groupIndex > 0) {
-        // El último grupo siempre muestra las últimas 4 tarjetas
-        startIndex = totalCards - cardsPerView;
-      } else {
-        // Grupos completos: cada grupo comienza en su índice normal
-        startIndex = groupIndex * cardsPerView;
-      }
-      
-      const slideDistance = cardWidth + gap;
-      return startIndex * slideDistance;
+      const remaining = totalCards - groupIndex * cardsPerView;
+      const startIndex =
+        remaining < cardsPerView && groupIndex > 0
+          ? totalCards - cardsPerView
+          : groupIndex * cardsPerView;
+      return startIndex * (cardWidth + gapPx);
     }
-    
-    // Función para actualizar la posición del carrusel
-    function updateCarousel() {
-      const cardWidth = getCardWidth();
-      if (cardWidth === 0) {
-        // Si aún no se ha calculado el ancho, reintentamos después de un breve delay
-        setTimeout(updateCarousel, 100);
-        return;
+
+    function buildPaginationDots() {
+      config = getViewportConfig();
+      const totalGroups = Math.ceil(totalCards / config.cardsPerView);
+      currentGroup = Math.min(currentGroup, totalGroups - 1);
+      if (currentGroup < 0) currentGroup = 0;
+
+      paginationEl.innerHTML = '';
+      for (let i = 0; i < totalGroups; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = paginationEl.getAttribute('data-dot-class') || 'paginationDot';
+        btn.setAttribute('data-group', String(i));
+        btn.setAttribute('aria-label', `Ir al grupo ${i + 1} de ${totalGroups}`);
+        btn.setAttribute('aria-current', i === currentGroup ? 'true' : 'false');
+        btn.addEventListener('click', () => {
+          currentGroup = i;
+          updateCarousel();
+          updateDotsActiveState();
+        });
+        paginationEl.appendChild(btn);
       }
-      
-      // Calculamos el desplazamiento para el grupo actual
-      const translateX = getGroupOffset(currentGroup);
-      
-      // Aplicamos la transformación con una transición suave
-      track.style.transform = `translateX(-${translateX}px)`;
-      track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      
-      // Actualizamos los indicadores de paginación
+    }
+
+    function updateDotsActiveState() {
+      const dots = paginationEl.querySelectorAll('[data-group]');
+      const totalGroups = dots.length;
       dots.forEach((dot, index) => {
         const isActive = index === currentGroup;
         dot.setAttribute('aria-current', isActive ? 'true' : 'false');
-        if (isActive) {
-          dot.classList.add('active');
-        } else {
-          dot.classList.remove('active');
-        }
+        dot.classList.toggle('active', isActive);
       });
     }
-    
-    // Event listeners para los puntos de paginación
-    dots.forEach((dot) => {
-      const groupIndex = parseInt(dot.getAttribute('data-group'), 10);
-      dot.addEventListener('click', () => {
-        currentGroup = groupIndex;
+
+    function updateCarousel() {
+      const cardWidth = getCardWidth();
+      if (cardWidth === 0) {
+        setTimeout(updateCarousel, 100);
+        return;
+      }
+      config = getViewportConfig();
+      const translateX = getGroupOffset(currentGroup, config.cardsPerView, config.gap);
+      track.style.transform = `translateX(-${translateX}px)`;
+      track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      updateDotsActiveState();
+    }
+
+    const AUTO_ADVANCE_MS_SMALL_VIEW = 3000; // 1–2 cards visible
+    const AUTO_ADVANCE_MS_LARGE_VIEW = 5000; // 3–4 cards visible
+    let autoAdvanceIntervalId: ReturnType<typeof setInterval> | undefined;
+
+    function startAutoAdvance() {
+      if (autoAdvanceIntervalId) clearInterval(autoAdvanceIntervalId);
+      config = getViewportConfig();
+      const intervalMs =
+        config.cardsPerView <= 2 ? AUTO_ADVANCE_MS_SMALL_VIEW : AUTO_ADVANCE_MS_LARGE_VIEW;
+      autoAdvanceIntervalId = setInterval(() => {
+        config = getViewportConfig();
+        const totalGroups = Math.ceil(totalCards / config.cardsPerView);
+        if (totalGroups <= 1) return;
+        currentGroup = (currentGroup + 1) % totalGroups;
         updateCarousel();
-      });
-    });
-    
-    // Auto-play opcional :el carrusel avanza automáticamente
-    /*
-    setInterval(() => {
-      currentGroup = (currentGroup + 1) % totalGroups;
-      updateCarousel();
-    }, 5000);
-    */
-    
-    setTimeout(() => {
-      updateCarousel();
-    }, 100);
-    
-    // Manejo de redimensionamiento de ventana con debounce
-    let resizeTimeout;
+      }, intervalMs);
+    }
+
+    buildPaginationDots();
+    setTimeout(updateCarousel, 100);
+    startAutoAdvance();
+
+    let resizeTimeout: ReturnType<typeof setTimeout> | undefined;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
+        buildPaginationDots();
         updateCarousel();
+        startAutoAdvance();
       }, 250);
     });
   })();
