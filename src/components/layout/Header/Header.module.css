@@ -1,0 +1,119 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-white-5);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.navLink {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-400);
+  transition: color var(--transition-normal);
+}
+
+.navLink:hover {
+  color: var(--color-white);
+}
+
+.ctaButton {
+  display: none;
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--color-primary-600);
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-normal);
+}
+
+.ctaButton:hover {
+  background-color: var(--color-primary-700);
+}
+
+.menuButton {
+  padding: var(--spacing-2);
+  color: var(--color-gray-400);
+  transition: color var(--transition-normal);
+}
+
+.menuButton:hover {
+  color: var(--color-white);
+}
+
+.menuIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.mobileMenu {
+  display: none;
+  padding: var(--spacing-6);
+  padding-top: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+  background-color: var(--color-dark-900);
+  border-top: 1px solid var(--color-white-5);
+}
+
+.mobileMenu.open {
+  display: block;
+}
+
+.mobileLink {
+  display: block;
+  padding: var(--spacing-2) 0;
+  color: var(--color-gray-400);
+  transition: color var(--transition-normal);
+}
+
+.mobileLink:hover {
+  color: var(--color-white);
+}
+
+.spacer {
+  height: var(--header-height);
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+
+  .ctaButton {
+    display: block;
+  }
+
+  .menuButton {
+    display: none;
+  }
+
+  .mobileMenu {
+    display: none !important;
+  }
+}

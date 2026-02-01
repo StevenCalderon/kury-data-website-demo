@@ -1,0 +1,112 @@
+.section {
+  padding: var(--spacing-12) var(--spacing-4);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-12);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-16);
+    align-items: center;
+  }
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  z-index: 2;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--color-white);
+  margin-bottom: var(--spacing-4);
+}
+
+.highlight {
+  background-image: linear-gradient(to right, #00D2FF, #0096FF, #004EFF);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-400);
+  line-height: 1.6;
+  max-width: 100%;
+}
+
+.buttons {
+  margin-top: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section {
+    padding: var(--spacing-16) var(--spacing-6);
+  }
+
+  .title {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--spacing-5);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    max-width: 28rem;
+  }
+
+  .buttons {
+    flex-direction: row;
+    margin-top: var(--spacing-8);
+    gap: var(--spacing-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: var(--spacing-24) var(--spacing-6);
+  }
+
+  .title {
+    font-size: var(--font-size-6xl);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    max-width: 32rem;
+  }
+
+  .buttons {
+    flex-direction: row;
+    margin-top: var(--spacing-8);
+    gap: var(--spacing-4);
+  }
+}

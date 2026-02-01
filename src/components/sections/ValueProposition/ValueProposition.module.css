@@ -1,0 +1,14 @@
+.section {
+  padding: var(--spacing-24) var(--spacing-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  border-bottom: 1px solid var(--color-white-5);
+}
+
+.title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-400);
+}

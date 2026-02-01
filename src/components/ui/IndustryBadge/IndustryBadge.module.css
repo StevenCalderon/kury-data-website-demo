@@ -1,0 +1,43 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4) var(--spacing-8);
+  
+  /* Background with subtle transparency */
+  background: rgba(30, 41, 59, 0.5);
+  
+  /* Border styling */
+  border: 1px solid var(--color-primary-500);
+  border-radius: 9999px;
+  
+  /* Typography from Figma specs */
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1.92rem; /* ~30.72px */
+  line-height: 100%;
+  letter-spacing: 0;
+  
+  /* Text color */
+  color: var(--color-primary-500);
+  
+  /* Smooth transitions for hover effects */
+  transition: background-color var(--transition-normal),
+              border-color var(--transition-normal),
+              transform var(--transition-normal);
+  
+  cursor: default;
+}
+
+.badge:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateX(8px);
+}
+
+/* Responsive: smaller text on mobile */
+@media (max-width: 768px) {
+  .badge {
+    font-size: 1.25rem;
+    padding: var(--spacing-3) var(--spacing-6);
+  }
+}

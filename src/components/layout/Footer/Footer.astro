@@ -1,0 +1,17 @@
+---
+import styles from './Footer.module.css';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class={styles.footer}>
+  <div class={styles.container}>
+    <a href="/" class={styles.logo}>
+      kurydata
+    </a>
+    
+    <p class={styles.copyright}>
+      © {currentYear} Kurydata. All rights reserved.
+    </p>
+  </div>
+</footer>

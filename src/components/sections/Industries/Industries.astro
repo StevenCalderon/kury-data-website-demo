@@ -1,0 +1,44 @@
+---
+import styles from './Industries.module.css';
+import IndustryBadge from '../../ui/IndustryBadge/IndustryBadge.astro';
+import Button from '../../ui/Button/Button.astro';
+
+// Industry data - easy to modify or extend
+const industries = [
+  'Telecomunicaciones',
+  'Travel',
+  'Inteligencia Artificial',
+  'Pagos y Fintech',
+  'AgriTech',
+];
+---
+
+<section class={styles.section}>
+  <div class={styles.container}>
+    
+    <!-- Left column: Industry badges -->
+    <div class={styles.badgeList}>
+      {industries.map((industry) => (
+        <IndustryBadge label={industry} />
+      ))}
+    </div>
+
+    <!-- Right column: Content -->
+    <div class={styles.content}>
+      <h2 class={styles.title}>
+        Liderando la Innovación Tecnológica en Cada Industria
+      </h2>
+      
+      <p class={styles.description}>
+        Implementamos soluciones de alto impacto diseñadas para dominar cada sector: 
+        desde manufactura avanzada y logística estratégica hasta biotecnología y 
+        comercio digital. Transformamos la complejidad en poder operativo.
+      </p>
+
+      <div class={styles.cta}>
+        <Button href="/contact">Iniciar Mi Proyecto</Button>
+      </div>
+    </div>
+
+  </div>
+</section>
