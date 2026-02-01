@@ -17,6 +17,15 @@
   --color-dark-900: #0f172a;
   --color-dark-950: #020617;
 
+  /* Background: focal lights + dark sections for contrast (not linear gradient) */
+  --bg-dark-zone: rgba(5, 5, 20, 0.85);
+  /* Light zones: #032087, high luminosity (vivid electric blue) */
+  --bg-glow-top-right: rgba(3, 32, 135, 0.82);
+  --bg-glow-top-right-fade: rgba(3, 32, 135, 0.42);
+  --bg-glow-bottom-right: rgba(3, 32, 135, 0.75);
+  --bg-glow-bottom-right-fade: rgba(3, 32, 135, 0.35);
+  --bg-vignette: rgba(2, 6, 23, 0.65);
+
   /* Gray scale */
   --color-gray-400: #9ca3af;
   --color-gray-500: #6b7280;
@@ -78,10 +87,59 @@ html {
 
 body {
   font-family: var(--font-family);
-  background-color: var(--color-dark-950);
   color: var(--color-white);
   min-height: 100vh;
   line-height: 1.5;
+  /* Base: deep blue-night, almost black in darkest zones */
+  background-color: #0a0a1a;
+  /* Pattern: focal lights (top-right, bottom center-right) + dark sections (top-left, bottom-left, edges). No linear gradient. */
+  background-image:
+    /* 1. Dark section: upper-left corner stays dark for contrast */
+    radial-gradient(
+      ellipse 90% 80% at 5% 5%,
+      var(--bg-dark-zone) 0%,
+      transparent 60%
+    ),
+    /* 2. Dark section: lower-left corner darker */
+    radial-gradient(
+      ellipse 80% 70% at 8% 95%,
+      var(--bg-dark-zone) 0%,
+      transparent 55%
+    ),
+    /* 3. Vignette: edges darker, reinforces contrast */
+    radial-gradient(
+      ellipse 100% 100% at 50% 50%,
+      transparent 42%,
+      var(--bg-vignette) 100%
+    ),
+    /* 4. Focal light: bottom center-right, diffuse (illuminates lower + central) */
+    radial-gradient(
+      ellipse 100% 90% at 72% 88%,
+      var(--bg-glow-bottom-right) 0%,
+      var(--bg-glow-bottom-right-fade) 40%,
+      transparent 70%
+    ),
+    /* 5. Focal light: top-right, bright focus, radiates down and left */
+    radial-gradient(
+      ellipse 75% 85% at 92% 5%,
+      var(--bg-glow-top-right) 0%,
+      var(--bg-glow-top-right-fade) 38%,
+      transparent 65%
+    );
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 a {
