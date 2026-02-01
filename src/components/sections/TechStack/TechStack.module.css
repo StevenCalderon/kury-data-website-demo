@@ -2,7 +2,6 @@
    SECTION
 ===================================================== */
 .section {
-  background: #060529;
   padding: 120px 64px;
 }
 
@@ -24,7 +23,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  max-width: 1200px;
+  padding: 0 3vw;
   margin: 0 auto;
   gap: var(--spacing-24);
 }
@@ -53,7 +52,7 @@
 
 .text {
   color: var(--color-gray-400);
-  max-width: 520px;
+  /* max-width: 520px; */
   margin: 0 auto;
   text-align: center;
 }
@@ -109,7 +108,7 @@
 /* =====================================================
    CONTENT
 ===================================================== */
-.content {
+/* .content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,7 +116,17 @@
   gap: var(--spacing-6);
   max-width: 520px;
 }
+ */
 
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-24);
+  padding: 0 5vw 0vw 0vw;
+  /* s */
+}
 /* =====================================================
    APPS
 ===================================================== */
@@ -180,7 +189,7 @@
 .glass {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  /* max-width: 520px; */
   padding: 32px;
   border-radius: 28px;
   background: rgba(255, 255, 255, 0.08);

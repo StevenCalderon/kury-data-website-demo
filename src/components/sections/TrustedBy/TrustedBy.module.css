@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  border-bottom: 1px solid var(--color-white-5);
 }
 
 .title {
