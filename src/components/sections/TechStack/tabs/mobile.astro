@@ -1,0 +1,64 @@
+---
+import TechStackTabContent from "../TechStackTabContent.astro";
+import type { TechStackApp, TechStackPerson } from "./types";
+
+export const tabKey = "mobile";
+export const tabLabel = "Móvil";
+
+const apps: TechStackApp[] = [
+  { title: "React Native", image: "/images/icons/cursor-logo.svg" },
+  { title: "Flutter", image: "/images/icons/figma.png" },
+  { title: "Swift", image: "/images/icons/protopie.png" },
+  { title: "Kotlin", image: "/images/icons/slack.png" },
+];
+
+const people: TechStackPerson[] = [
+  {
+    name: "Mobile Dev 1",
+    avatar: "/images/people/persona.png",
+    position: {
+      bottom: "150px",
+      left: "-35px",
+      background: "#ffc0ae",
+      borderColor: "#f87854",
+      arrow: {
+        position: "right",
+        offset: "-38px",
+        top: "-68%",
+        rotation: -52,
+        clipPath: "polygon(0 15%, 100% 50%, 0 85%)",
+      },
+    },
+  },
+  {
+    name: "Mobile Dev 2",
+    avatar: "/images/people/persona.png",
+    position: {
+      bottom: "50px",
+      right: "-45px",
+      background: "#d6c0fd",
+      borderColor: "#ad7eff",
+      arrow: {
+        position: "left",
+        offset: "-38px",
+        top: "-68%",
+        rotation: 52,
+        clipPath: "polygon(100% 15%, 0 50%, 100% 85%)",
+      },
+    },
+  },
+];
+
+const heading = "Aplicaciones Móviles Nativas.";
+const text =
+  "Desarrollamos aplicaciones móviles nativas e híbridas que ofrecen experiencias excepcionales. Desde iOS hasta Android, creamos apps que los usuarios aman usar.";
+const image = "/images/movil.png";
+---
+
+<TechStackTabContent
+  heading={heading}
+  text={text}
+  apps={apps}
+  image={image}
+  people={people}
+/>

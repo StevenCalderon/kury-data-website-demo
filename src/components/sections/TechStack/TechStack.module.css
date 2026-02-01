@@ -45,6 +45,7 @@ revisa si no hay redundancia
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+  gap: var(--spacing-24);
 }
 
 
@@ -152,7 +153,6 @@ flex-shrink: 0;
   display: flex;
   justify-content: center;
   gap: 20px;
-  /* 🔥 espacio real entre logos */
   margin: var(--spacing-10) 0;
 }
 
@@ -193,7 +193,6 @@ flex-shrink: 0;
 
   padding: 12px 28px;
   width: fit-content;
-  /* 🔥 evita que se estire */
   max-width: 100%;
 
   background: var(--primary-00, #0042FF);
@@ -242,10 +241,9 @@ flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 8px 14px;
   border-radius: 999px;
-
+  border: 2px solid;
   font-size: 14px;
   font-weight: 500;
   color: #000;
@@ -253,84 +251,16 @@ flex-shrink: 0;
   z-index: 2;
 }
 
-.badge::after {
-  content: "";
+.badgeArrow {
   position: absolute;
   width: 30px;
-  /* ⬅ GRANDE */
   height: 35px;
-  /* ⬅ GRANDE */
   background: inherit;
   border-radius: 8px;
-  /* ⬅ suaviza las puntas */
   z-index: 3;
-  /* asegura que esté delante */
+  pointer-events: none;
 }
 
-
-
-.badge1 {
-  background: #ffdc7a;
-  border: 2px solid #ffc219;
-  top: 160px;
-  left: -40px;
-}
-
-.badge2 {
-  background: #93fff6;
-  border: 2px solid #4ae9d9;
-  top: 80px;
-  right: -40px;
-}
-
-.badge3 {
-  background: #ffc0ae;
-  border: 2px solid #f87854;
-  bottom: 40px;
-  left: 40px;
-}
-
-.badge4 {
-  background: #d6c0fd;
-  border: 2px solid #ad7eff;
-  bottom: -20px;
-  right: 20px;
-}
-
-.badge1::after {
-  right: -34px;
-  top: 55%;
-  transform: rotate(25deg);
-  clip-path: polygon(0 15%, 100% 50%, 0 85%);
-}
-
-
-
-
-.badge2::after {
-  left: -34px;
-  top: 55%;
-  transform: rotate(-25deg);
-  clip-path: polygon(100% 15%, 0 50%, 100% 85%);
-}
-
-/* Flecha 3 */
-.badge3::after {
-  right: -40px;
-  top: -69%;
-  transform: rotate(-55deg);
-  clip-path: polygon(0 15%, 100% 50%, 0 85%);
-}
-
-/* Flecha 4 */
-.badge4::after {
-  left: -40px;
-  top: -69%;
-  transform: rotate(55deg);
-  clip-path: polygon(100% 15%, 0 50%, 100% 85%);
-}
-
-/* Avatar dentro del badge */
 .avatar {
   width: 32px;
   height: 32px;
@@ -339,7 +269,6 @@ flex-shrink: 0;
   border: 2px solid rgba(0, 0, 0, 0.15);
 }
 
-/* Contenedor del texto */
 .badgeText {
   display: flex;
   flex-direction: column;

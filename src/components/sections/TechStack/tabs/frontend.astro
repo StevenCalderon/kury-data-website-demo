@@ -1,0 +1,64 @@
+---
+import TechStackTabContent from "../TechStackTabContent.astro";
+import type { TechStackApp, TechStackPerson } from "./types";
+
+export const tabKey = "frontend";
+export const tabLabel = "Frontend";
+
+const apps: TechStackApp[] = [
+  { title: "React", image: "/images/icons/cursor-logo.svg" },
+  { title: "Vue", image: "/images/icons/figma.png" },
+  { title: "Astro", image: "/images/icons/protopie.png" },
+  { title: "TypeScript", image: "/images/icons/slack.png" },
+];
+
+const people: TechStackPerson[] = [
+  {
+    name: "Frontend Dev 1",
+    avatar: "/images/people/persona.png",
+    position: {
+      top: "120px",
+      left: "-30px",
+      background: "#ffdc7a",
+      borderColor: "#ffc219",
+      arrow: {
+        position: "right",
+        offset: "-28px",
+        top: "50%",
+        rotation: 20,
+        clipPath: "polygon(0 15%, 100% 50%, 0 85%)",
+      },
+    },
+  },
+  {
+    name: "Frontend Dev 2",
+    avatar: "/images/people/persona.png",
+    position: {
+      top: "200px",
+      right: "-30px",
+      background: "#93fff6",
+      borderColor: "#4ae9d9",
+      arrow: {
+        position: "left",
+        offset: "-28px",
+        top: "50%",
+        rotation: -20,
+        clipPath: "polygon(100% 15%, 0 50%, 100% 85%)",
+      },
+    },
+  },
+];
+
+const heading = "Interfaces Modernas y Performantes.";
+const text =
+  "Desarrollamos aplicaciones web de alto rendimiento utilizando las últimas tecnologías frontend. Creamos experiencias fluidas y responsivas que se adaptan a cualquier dispositivo.";
+const image = "/images/movil.png";
+---
+
+<TechStackTabContent
+  heading={heading}
+  text={text}
+  apps={apps}
+  image={image}
+  people={people}
+/>

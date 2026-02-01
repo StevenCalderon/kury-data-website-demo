@@ -1,0 +1,98 @@
+---
+import TechStackTabContent from "../TechStackTabContent.astro";
+import type { TechStackApp, TechStackPerson } from "./types";
+
+export const tabKey = "uiux";
+export const tabLabel = "Diseño UI/UX";
+
+const apps: TechStackApp[] = [
+  { title: "Miro", image: "/images/icons/miro.png" },
+  { title: "Figma", image: "/images/icons/figma.png" },
+  { title: "ProtoPie", image: "/images/icons/protopie.png" },
+  { title: "Slack", image: "/images/icons/slack.png" },
+];
+
+const people: TechStackPerson[] = [
+  {
+    name: "Iván Vera",
+    avatar: "/images/people/persona.png",
+    position: {
+      top: "160px",
+      left: "-40px",
+      background: "#ffdc7a",
+      borderColor: "#ffc219",
+      arrow: {
+        position: "right",
+        offset: "-34px",
+        top: "55%",
+        rotation: 25,
+        clipPath: "polygon(0 15%, 100% 50%, 0 85%)",
+      },
+    },
+  },
+  {
+    name: "Julia Gomez",
+    avatar: "/images/people/persona.png",
+    position: {
+      top: "80px",
+      right: "-40px",
+      background: "#93fff6",
+      borderColor: "#4ae9d9",
+      arrow: {
+        position: "left",
+        offset: "-34px",
+        top: "55%",
+        rotation: -25,
+        clipPath: "polygon(100% 15%, 0 50%, 100% 85%)",
+      },
+    },
+  },
+  {
+    name: "Leo",
+    avatar: "/images/people/persona.png",
+    position: {
+      bottom: "40px",
+      left: "40px",
+      background: "#ffc0ae",
+      borderColor: "#f87854",
+      arrow: {
+        position: "right",
+        offset: "-40px",
+        top: "-69%",
+        rotation: -55,
+        clipPath: "polygon(0 15%, 100% 50%, 0 85%)",
+      },
+    },
+  },
+  {
+    name: "Dennis",
+    avatar: "/images/people/persona.png",
+    position: {
+      bottom: "-20px",
+      right: "20px",
+      background: "#d6c0fd",
+      borderColor: "#ad7eff",
+      arrow: {
+        position: "left",
+        offset: "-40px",
+        top: "-69%",
+        rotation: 55,
+        clipPath: "polygon(100% 15%, 0 50%, 100% 85%)",
+      },
+    },
+  },
+];
+
+const heading = "Experiencias Humanizadas.";
+const text =
+  "Creamos prototipos de alta fidelidad e interfaces intuitivas diseñadas para maximizar la retención de usuarios y las tasas de conversión. Nuestro proceso de diseño combina la estética visual con experiencias de usuario fluidas.";
+const image = "/images/movil.png";
+---
+
+<TechStackTabContent
+  heading={heading}
+  text={text}
+  apps={apps}
+  image={image}
+  people={people}
+/>
