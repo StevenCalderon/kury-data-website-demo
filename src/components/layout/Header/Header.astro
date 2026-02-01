@@ -1,53 +1,141 @@
 ---
-import styles from './Header.module.css';
+import styles from "./Header.module.css";
 
 const navLinks = [
-  { label: 'About Us', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Contact', href: '/contact' },
+  { label: "Nosotros", href: "#about", hasDropdown: false },
+  { label: "Resultados", href: "#results", hasDropdown: true },
+  { label: "Testimonios", href: "#testimonials", hasDropdown: true },
+  { label: "Clientes", href: "#clients", hasDropdown: true },
 ];
+
+const moreInfoHref = "#more-info";
+const writeNowHref = "#contact";
 ---
 
 <header class={styles.header}>
   <div class={styles.container}>
-    
-    <a href="/" class={styles.logo}>
-      kurydata
+
+    <!-- LOGO -->
+    <a href="#hero" class={styles.brand} aria-label="Ir al inicio">
+      <img src="/images/logo.png" alt="Kurydata logo" class={styles.logoImg} />
+      <span class={styles.brandText}>kurydata</span>
     </a>
 
-    <nav class={styles.nav}>
-      {navLinks.map(link => (
-        <a href={link.href} class={styles.navLink}>
+    <nav class={styles.nav} aria-label="Menú principal">
+      <div class={styles.navGroup}>
+        {navLinks.map((link) => (
+          <a class={styles.navItem} href={link.href}>
+            <span>{link.label}</span>
+            {link.hasDropdown && (
+              <span class={styles.chev} aria-hidden="true">▾</span>
+            )}
+          </a>
+        ))}
+      </div>
+    </nav>
+
+    <!-- ACTIONS -->
+    <div class={styles.actions}>
+      <a class={styles.btnOutline} href={moreInfoHref}>
+        Más información
+      </a>
+
+      <a class={styles.btnSolid} href={writeNowHref}>
+        Escríbenos ahora
+      </a>
+
+      <!-- HAMBURGUESA -->
+      <button
+        id="menu-toggle"
+        class={styles.menuButton}
+        type="button"
+        aria-label="Abrir menú"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <svg class={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- MENÚ MÓVIL -->
+  <nav
+    id="mobile-menu"
+    class={styles.mobileMenu}
+    aria-label="Menú móvil"
+    data-open="false"
+  >
+    <div class={styles.mobileInner}>
+      {navLinks.map((link) => (
+        <a class={styles.mobileLink} href={link.href}>
           {link.label}
         </a>
       ))}
-    </nav>
 
-    <a href="/contact" class={styles.ctaButton}>
-      Contact Us
-    </a>
-
-    <button id="menu-toggle" class={styles.menuButton}>
-      <svg class={styles.menuIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-  </div>
-
-  <nav id="mobile-menu" class={styles.mobileMenu}>
-    {navLinks.map(link => (
-      <a href={link.href} class={styles.mobileLink}>
-        {link.label}
-      </a>
-    ))}
+      <div class={styles.mobileActions}>
+        <a class={styles.btnOutlineMobile} href={moreInfoHref}>
+          Más información
+        </a>
+        <a class={styles.btnSolidMobile} href={writeNowHref}>
+          Escríbenos ahora
+        </a>
+      </div>
+    </div>
   </nav>
 </header>
 
-<div class={styles.spacer}></div>
-
 <script>
-  document.getElementById('menu-toggle')?.addEventListener('click', () => {
-    const menu = document.getElementById('mobile-menu');
-    menu?.classList.toggle('open');
+  window.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+
+    if (!btn || !menu) return;
+
+    const closeMenu = () => {
+      menu.setAttribute("data-open", "false");
+      btn.setAttribute("aria-expanded", "false");
+    };
+
+    const openMenu = () => {
+      menu.setAttribute("data-open", "true");
+      btn.setAttribute("aria-expanded", "true");
+    };
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = menu.getAttribute("data-open") === "true";
+      if (isOpen) closeMenu();
+      else openMenu();
+    });
+
+    menu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!(e.target instanceof Node)) return;
+      const clickedInside = menu.contains(e.target) || btn.contains(e.target);
+      if (!clickedInside) closeMenu();
+    });
   });
+  window.addEventListener("resize", () => {
+  const menu = document.getElementById("mobile-menu");
+  const btn = document.getElementById("menu-toggle");
+
+  if (!menu || !btn) return;
+
+  // 860px = tu breakpoint
+  if (window.innerWidth > 860) {
+    menu.setAttribute("data-open", "false");
+    btn.setAttribute("aria-expanded", "false");
+  }
+});
+
 </script>
