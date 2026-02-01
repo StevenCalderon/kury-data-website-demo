@@ -1,59 +1,37 @@
-revisa si no hay redundancia
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-6);
-}
-
 /* =====================================================
    SECTION
 ===================================================== */
-
 .section {
-  width: 100%;
   background: #060529;
   padding: 120px 64px;
 }
 
-
 /* =====================================================
    HEADER
 ===================================================== */
-
 .header {
   max-width: 820px;
-  margin: 0 auto var(--spacing-16);
+  margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-
-
 /* =====================================================
    GRID
 ===================================================== */
-
 .grid {
-   display: grid;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-
-
-
 /* =====================================================
    TYPOGRAPHY
 ===================================================== */
-
 .title {
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 700;
@@ -68,7 +46,6 @@ revisa si no hay redundancia
   line-height: 1.6;
 }
 
-
 .heading {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
@@ -82,17 +59,21 @@ revisa si no hay redundancia
   text-align: center;
 }
 
-
 /* =====================================================
    TABS
 ===================================================== */
-
 .tabs {
   display: flex;
-  justify-content: center;
-  gap: var(--spacing-3);
+  gap: 12px;
   margin-top: var(--spacing-8);
+  justify-content: center;
   flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
 .tab[data-active="true"] {
@@ -106,15 +87,14 @@ revisa si no hay redundancia
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 6px 24px;
   height: 44px;
-
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 32px;
-flex-shrink: 0;
+  flex-shrink: 0;
   white-space: nowrap;
+  cursor: pointer;
   font-weight: 500;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.75);
@@ -122,18 +102,14 @@ flex-shrink: 0;
   transition: all 0.25s ease;
 }
 
-
 .tab:hover {
   border-color: rgba(255, 255, 255, 0.45);
   color: #fff;
 }
 
-
-
 /* =====================================================
    CONTENT
 ===================================================== */
-
 .content {
   display: flex;
   flex-direction: column;
@@ -143,16 +119,14 @@ flex-shrink: 0;
   max-width: 520px;
 }
 
-
-
 /* =====================================================
    APPS
 ===================================================== */
 .apps {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
-  /* 🔥 espacio real entre logos */
   margin: var(--spacing-10) 0;
 }
 
@@ -166,9 +140,7 @@ flex-shrink: 0;
   place-items: center;
   backdrop-filter: blur(6px);
   cursor: pointer;
-
   transition: transform 0.25s ease, background 0.25s ease;
-
 }
 
 .appIcon:hover {
@@ -185,28 +157,22 @@ flex-shrink: 0;
 /* =====================================================
    BUTTON
 ===================================================== */
-
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 12px 28px;
   width: fit-content;
-  /* 🔥 evita que se estire */
   max-width: 100%;
-
   background: var(--primary-00, #0042FF);
   color: white;
   border-radius: 999px;
   font-weight: var(--font-weight-medium);
 }
 
-
 /* =====================================================
    VISUAL
 ===================================================== */
-
 .visual {
   display: flex;
   justify-content: center;
@@ -224,7 +190,6 @@ flex-shrink: 0;
   margin: 0 auto;
 }
 
-
 .mockup {
   width: 100%;
   max-width: 360px;
@@ -232,20 +197,16 @@ flex-shrink: 0;
   display: block;
 }
 
-
 /* =====================================================
    BADGES
 ===================================================== */
-
 .badge {
   position: absolute;
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 8px 14px;
   border-radius: 999px;
-
   font-size: 14px;
   font-weight: 500;
   color: #000;
@@ -257,17 +218,11 @@ flex-shrink: 0;
   content: "";
   position: absolute;
   width: 30px;
-  /* ⬅ GRANDE */
   height: 35px;
-  /* ⬅ GRANDE */
   background: inherit;
   border-radius: 8px;
-  /* ⬅ suaviza las puntas */
   z-index: 3;
-  /* asegura que esté delante */
 }
-
-
 
 .badge1 {
   background: #ffdc7a;
@@ -297,6 +252,7 @@ flex-shrink: 0;
   right: 20px;
 }
 
+/* Flecha 1 */
 .badge1::after {
   right: -34px;
   top: 55%;
@@ -304,9 +260,7 @@ flex-shrink: 0;
   clip-path: polygon(0 15%, 100% 50%, 0 85%);
 }
 
-
-
-
+/* Flecha 2 */
 .badge2::after {
   left: -34px;
   top: 55%;
@@ -356,62 +310,21 @@ flex-shrink: 0;
   opacity: 0.75;
 }
 
-
-
-
 /* =====================================================
    RESPONSIVE
 ===================================================== */
 @media (max-width: 767px) {
-
-  .section {
-    padding: var(--spacing-16) var(--spacing-4);
-  }
 
   .grid {
     grid-template-columns: 1fr;
     gap: 56px;
   }
 
-  .header,
-  .content {
-    align-items: center;
-    text-align: center;
-     max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .text {
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .apps {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-   .tabs {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-start;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
   .tabs::-webkit-scrollbar {
     display: none;
   }
 
-  .tab {
-    padding: 6px 18px;
-    font-size: 13px;
-  }
-
-   .badge {
+  .badge {
     position: static;
     display: flex;
     margin: 8px auto;
@@ -426,44 +339,33 @@ flex-shrink: 0;
     flex-direction: column;
     align-items: center;
   }
-}
 
-
-
-@media (max-width: 768px) {
   .header {
-    padding: 0 var(--spacing-4);
+    align-items: stretch;
   }
 
-  .title,
-  .subtitle {
-    text-align: center;
-  }
-
-  .text {
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .apps {
+  .tabs {
     justify-content: center;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     flex-wrap: wrap;
   }
 
-  .section {
-    padding: var(--spacing-16) 0;
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
+}
 
-  .tab {
-    cursor: pointer;
-  }
+@media (min-width: 768px) and (max-width: 1023px) {
 
   .tabActive {
     transform: translateY(-1px);
   }
 }
-
-
 
 @media (min-width: 1024px) {
 
@@ -471,7 +373,6 @@ flex-shrink: 0;
   .content {
     align-items: flex-start;
     text-align: left;
-    padding-left: var(--spacing-8);
   }
 
   .heading {
@@ -483,7 +384,4 @@ flex-shrink: 0;
     text-align: left;
   }
 
-  .apps {
-    justify-content: flex-start;
-  }
 }
