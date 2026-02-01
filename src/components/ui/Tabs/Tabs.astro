@@ -1,0 +1,72 @@
+---
+import styles from "./Tabs.module.css";
+
+interface Props {
+  tabs: Array<{ key: string; label: string }>;
+  defaultTab?: string;
+  tabId?: string;
+}
+
+const { tabs, defaultTab = tabs[0]?.key, tabId = "tabs" } = Astro.props;
+const containerId = `${tabId}-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={styles.tabsContainer} data-tabs-container={containerId} data-tab-id={tabId}>
+  <div class={styles.tabsList} role="tablist">
+    {tabs.map((tab) => (
+      <button
+        class={styles.tabButton}
+        role="tab"
+        aria-selected={tab.key === defaultTab ? "true" : "false"}
+        aria-controls={`${tabId}-panel-${tab.key}`}
+        id={`${tabId}-tab-${tab.key}`}
+        data-tab-key={tab.key}
+        data-tab-active={tab.key === defaultTab ? "true" : "false"}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  <div>
+    <slot />
+  </div>
+</div>
+
+<script define:vars={{ containerId, tabId, defaultTab }}>
+  (function initTabs() {
+    const container = document.querySelector(`[data-tabs-container="${containerId}"]`);
+    if (!container) return;
+
+    const tabButtons = container.querySelectorAll("[data-tab-key]");
+    const tabPanels = container.querySelectorAll("[data-tab-panel]");
+    let currentActiveTab = defaultTab;
+
+    function switchTab(tabKey) {
+      tabButtons.forEach((btn) => {
+        const isActive = btn.getAttribute("data-tab-key") === tabKey;
+        btn.setAttribute("data-tab-active", isActive ? "true" : "false");
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      tabPanels.forEach((panel) => {
+        const isActive = panel.getAttribute("data-tab-panel") === tabKey;
+        panel.setAttribute("data-tab-active", isActive ? "true" : "false");
+        panel.setAttribute("aria-hidden", isActive ? "false" : "true");
+      });
+
+      currentActiveTab = tabKey;
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tabKey = btn.getAttribute("data-tab-key");
+        if (tabKey && tabKey !== currentActiveTab) {
+          switchTab(tabKey);
+        }
+      });
+    });
+
+    switchTab(defaultTab);
+  })();
+</script>

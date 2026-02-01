@@ -1,0 +1,64 @@
+---
+import TechStackTabContent from "../TechStackTabContent.astro";
+import type { TechStackApp, TechStackPerson } from "./types";
+
+export const tabKey = "backend";
+export const tabLabel = "Backend & IA";
+
+const apps: TechStackApp[] = [
+  { title: "Node.js", image: "/images/icons/cursor-logo.svg" },
+  { title: "Python", image: "/images/icons/figma.png" },
+  { title: "AI/ML", image: "/images/icons/protopie.png" },
+  { title: "API", image: "/images/icons/slack.png" },
+];
+
+const people: TechStackPerson[] = [
+  {
+    name: "Backend Dev 1",
+    avatar: "/images/people/persona.png",
+    position: {
+      bottom: "60px",
+      left: "30px",
+      background: "#ffc0ae",
+      borderColor: "#f87854",
+      arrow: {
+        position: "right",
+        offset: "-35px",
+        top: "-65%",
+        rotation: -50,
+        clipPath: "polygon(0 15%, 100% 50%, 0 85%)",
+      },
+    },
+  },
+  {
+    name: "AI Engineer",
+    avatar: "/images/people/persona.png",
+    position: {
+      bottom: "250px",
+      right: "-80px",
+      background: "#d6c0fd",
+      borderColor: "#ad7eff",
+      arrow: {
+        position: "left",
+        offset: "-35px",
+        top: "-65%",
+        rotation: 50,
+        clipPath: "polygon(100% 15%, 0 50%, 100% 85%)",
+      },
+    },
+  },
+];
+
+const heading = "Arquitectura Escalable e Inteligente.";
+const text =
+  "Construimos backends robustos y escalables, integrando inteligencia artificial para automatizar procesos y mejorar la experiencia del usuario. Nuestras soluciones están diseñadas para crecer con tu negocio.";
+const image = "/images/movil.png";
+---
+
+<TechStackTabContent
+  heading={heading}
+  text={text}
+  apps={apps}
+  image={image}
+  people={people}
+/>
