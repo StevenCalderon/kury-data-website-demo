@@ -1,0 +1,23 @@
+.tabPanel {
+  display: block;
+}
+
+.tabPanel[data-tab-active="false"] {
+  display: none;
+}
+
+.tabPanel[data-tab-active="true"] {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

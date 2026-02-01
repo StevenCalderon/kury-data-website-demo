@@ -1,33 +1,194 @@
-.footer {
-  background-color: var(--color-dark-900);
-  border-top: 1px solid var(--color-white-5);
-  padding: var(--spacing-12) 0;
+/* Layout general */
+.wrapper {
+    width: 100%;
+    /* Ajusta este max-width según el ancho de tu sitio web */
+    max-width: 1400px; 
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-6);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-4);
+.card {
+    /* Color base azul oscuro semitransparente */
+    background: linear-gradient(180deg, rgba(20, 30, 90, 0.4) 0%, rgba(10, 20, 60, 0.6) 100%);
+    
+    /* El efecto cristal */
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    
+    box-shadow: 0 30px 60px rgba(0, 5, 20, 0.3);
 }
 
-.logo {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-white);
+/* El brillo azul detrás del logo */
+.glow {
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 600px;
+    height: 600px;
+    /* Degradado radial que simula el foco de luz de la imagen */
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(29, 78, 216, 0.05) 50%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* --- SECCIÓN SUPERIOR --- */
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 60px;
+}
+
+/* Logo */
+.brand {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 40px;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brandName {
+    font-family: 'Inter', system-ui, sans-serif; /* Asumiendo una fuente sans limpia */
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+/* Columnas de Links */
+.links {
+    display: flex;
+    gap: 100px; /* Mucho espacio entre columnas como en la imagen */
+}
+
+.column h4 {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 24px 0;
+    color: #ffffff;
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.column ul li {
+    margin-bottom: 14px;
+}
+
+.column ul li a {
+    text-decoration: none;
+    /* Color gris claro/azulado para el texto inactivo */
+    color: rgba(220, 230, 255, 0.8);
+    font-size: 16px;
+    font-weight: 400;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.column ul li a:hover {
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+
+.divider {
+    height: 1px;
+  
+    background: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.socials {
+    display: flex;
+    gap: 24px;
+}
+
+.socials a {
+    color: #ffffff;
+    opacity: 0.9;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.socials a:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .links { gap: 50px; }
+    .card { padding: 50px 40px; }
+}
+
+@media (max-width: 900px) {
+    .top { flex-direction: column; }
+    .links { 
+        width: 100%; 
+        justify-content: space-between; 
+        flex-wrap: wrap; 
+        gap: 40px; 
+    }
+}
+
+@media (max-width: 600px) {
+    .links { flex-direction: column; gap: 30px; }
+    .bottom { 
+        flex-direction: column-reverse; 
+        gap: 24px; 
+        align-items: flex-start; 
+    }
+    .card { padding: 40px 24px; border-radius: 20px; }
+    .brandName { font-size: 26px; }
+}
+
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    padding-top: 10px;
+}
+
+
+.bottomLine {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1); 
+    width: 100%;
+    margin-top: 30px; 
+    position: relative;
+    z-index: 1;
 }
 
 .copyright {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-500);
-}
-
-@media (min-width: 768px) {
-  .container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    color: rgba(220, 230, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
 }

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/favicon.svg" width="60" alt="Kurydata Logo">
+  <img src="public/images/icons/kuryDataLogo.svg" width="60" alt="Kurydata Logo">
 </p>
 
 <h1 align="center">Kurydata Website</h1>

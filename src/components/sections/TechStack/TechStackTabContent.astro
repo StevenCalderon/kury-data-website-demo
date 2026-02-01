@@ -1,0 +1,90 @@
+---
+import type { TechStackApp, TechStackPerson } from "./tabs/types";
+import styles from "./TechStack.module.css";
+
+interface Props {
+  heading: string;
+  text: string;
+  apps: TechStackApp[];
+  image: string;
+  people?: TechStackPerson[];
+}
+
+const { heading, text, apps, image, people = [] } = Astro.props;
+
+function getBadgeStyles(position: TechStackPerson["position"]) {
+  const styles: Record<string, string> = {
+    background: position.background,
+    borderColor: position.borderColor,
+  };
+
+  if (position.top !== undefined) styles.top = position.top;
+  if (position.right !== undefined) styles.right = position.right;
+  if (position.bottom !== undefined) styles.bottom = position.bottom;
+  if (position.left !== undefined) styles.left = position.left;
+
+  return Object.entries(styles)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join("; ");
+}
+
+function getArrowStyles(arrow: TechStackPerson["position"]["arrow"]) {
+  if (!arrow) return "";
+
+  const styles: Record<string, string> = {
+    [arrow.position]: arrow.offset,
+    top: arrow.top,
+    transform: `rotate(${arrow.rotation}deg)`,
+    "clip-path": arrow.clipPath,
+  };
+
+  return Object.entries(styles)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join("; ");
+}
+---
+
+<div class={styles.grid}>
+  <div class={styles.content}>
+    <h3 class={styles.heading}>{heading}</h3>
+    <p class={styles.text}>{text}</p>
+
+    <div class={styles.apps}>
+      {apps.map((item) => (
+        <div class={styles.appIcon} title={item.title}>
+          <img src={item.image} alt={item.title} />
+        </div>
+      ))}
+    </div>
+
+    <br />
+    <a href="#contact" class={styles.button}>Iniciar Mi Proyecto</a>
+  </div>
+
+  <div class={styles.visual}>
+    <div class={styles.glass}>
+      <img class={styles.mockup} src={image} alt={heading} />
+      {people.map((person) => (
+        <span
+          class={styles.badge}
+          style={getBadgeStyles(person.position)}
+        >
+          {person.position.arrow && (
+            <span
+              class={styles.badgeArrow}
+              style={getArrowStyles(person.position.arrow)}
+            />
+          )}
+          <img
+            src={person.avatar}
+            alt={person.name}
+            class={styles.avatar}
+          />
+          <div class={styles.badgeText}>
+            <strong>{person.name}</strong>
+          </div>
+        </span>
+      ))}
+    </div>
+  </div>
+</div>
