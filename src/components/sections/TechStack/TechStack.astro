@@ -1,130 +1,40 @@
 ---
 import styles from "./TechStack.module.css";
+import Tabs from "../../ui/Tabs/Tabs.astro";
+import TabPanel from "../../ui/Tabs/TabPanel.astro";
+import { techStackTabsMetadata, UiuxTab, FrontendTab, BackendTab, InfraTab, MobileTab } from "./tabs";
 
-const process = [
-  { title: "Miro", image: "/images/icons/miro.png" },
-  { title: "Figma", image: "/images/icons/figma.png" },
-  { title: "ProtoPie", image: "/images/icons/protopie.png" },
-  { title: "Slack", image: "/images/icons/slack.png" },
-];
-
-const tabsData = [
-  {
-    key: "uiux",
-    image: "/images/movil.png",
-    people: [
-      {
-        name: "Iván Vera",
-        avatar: "/images/people/persona.png",
-        badge: "badge1",
-      },
-      {
-        name: "Julia Gomez",
-        avatar: "/images/people/persona.png",
-        badge: "badge2",
-      },
-      {
-        name: "Leo",
-        avatar: "/images/people/persona.png",
-        badge: "badge3",
-      },
-      {
-        name: "Dennis",
-        avatar: "/images/people/persona.png",
-        badge: "badge4",
-      },
-    ],
-  },
-];
+const tabs = techStackTabsMetadata.map((tab) => ({
+  key: tab.key,
+  label: tab.label,
+}));
 ---
 
 <section class={styles.section}>
   <div class={styles.container}>
-    <!-- Header -->
     <div class={styles.header}>
       <h2 class={styles.title}>Nuestro Stack Tecnológico de Clase Mundial</h2>
-
       <p class={styles.subtitle}>
         Utilizamos las herramientas más confiables y escalables para tu futuro.
       </p>
 
-      <div class={styles.tabs} data-tabs>
-        <span class={styles.tab} data-tab="uiux" data-active="true"
-          >Diseño UI/UX</span
-        >
-        <span class={styles.tab} data-tab="frontend" data-active="false"
-          >Frontend</span
-        >
-        <span class={styles.tab} data-tab="backend" data-active="false"
-          >Backend & IA</span
-        >
-        <span class={styles.tab} data-tab="infra" data-active="false"
-          >Infraestructura</span
-        >
-        <span class={styles.tab} data-tab="mobile" data-active="false"
-          >Móvil</span
-        >
-      </div>
-    </div>
-
-    <!-- Grid -->
-    <div class={styles.grid}>
-      <!-- Left -->
-      <div class={styles.content}>
-        <h3 class={styles.heading}>Experiencias Humanizadas.</h3>
-
-        <p class={styles.text}>
-          Creamos prototipos de alta fidelidad e interfaces intuitivas diseñadas
-          para maximizar la retención de usuarios y las tasas de conversión.
-          Nuestro proceso de diseño combina la estética visual con experiencias
-          de usuario fluidas.
-        </p>
-
-        <div class={styles.apps}>
-          {
-            process.map((item) => (
-              <div class={styles.appIcon} title={item.title}>
-                <img src={item.image} alt={item.title} />
-              </div>
-            ))
-          }
-        </div>
-
-        <br />
-        <a href="/contact" class={styles.button}> Iniciar Mi Proyecto </a>
-      </div>
-      <!-- Right -->
-      <div class={styles.visual}>
-        <div class={styles.glass}>
-          <img class={styles.mockup} src="/images/movil.png" />
-          {
-            tabsData[0].people.map((person) => (
-              <span class={`${styles.badge} ${styles[person.badge]}`}>
-                <img
-                  src={person.avatar}
-                  alt={person.name}
-                  class={styles.avatar}
-                />
-
-                <div class={styles.badgeText}>
-                  <strong>{person.name}</strong>
-                </div>
-              </span>
-            ))
-          }
-        </div>
-      </div>
+      <Tabs tabs={tabs} defaultTab="uiux" tabId="techstack">
+        <TabPanel tabKey="uiux" tabId="techstack">
+          <UiuxTab />
+        </TabPanel>
+        <TabPanel tabKey="frontend" tabId="techstack">
+          <FrontendTab />
+        </TabPanel>
+        <TabPanel tabKey="backend" tabId="techstack">
+          <BackendTab />
+        </TabPanel>
+        <TabPanel tabKey="infra" tabId="techstack">
+          <InfraTab />
+        </TabPanel>
+        <TabPanel tabKey="mobile" tabId="techstack">
+          <MobileTab />
+        </TabPanel>
+      </Tabs>
     </div>
   </div>
 </section>
-
-<script>
-  const tabs = document.querySelectorAll("[data-tab]");
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      tabs.forEach((t) => t.setAttribute("data-active", "false"));
-      tab.setAttribute("data-active", "true");
-    });
-  });
-</script>
