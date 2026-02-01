@@ -164,7 +164,6 @@ const rustCode = `pub fn kury_sol_exec(id: Sig) -> Result<Ok, Err> {
         codePre.style.cssText = `height: ${finalHeight}px; min-height: ${finalHeight}px; max-height: ${finalHeight}px; overflow: hidden;`;
         targetElement.style.cssText = `max-height: ${finalHeight}px; overflow: hidden; display: block;`;
         codeContainer.style.cssText = `height: ${finalHeight}px; min-height: ${finalHeight}px;`;
-
         void codePre.offsetHeight;
         void codeContainer.offsetHeight;
         void targetElement.offsetHeight;

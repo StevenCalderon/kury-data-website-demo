@@ -1,40 +1,35 @@
 ---
-import styles from "./TechStack.module.css";
-import Tabs from "../../ui/Tabs/Tabs.astro";
-import TabPanel from "../../ui/Tabs/TabPanel.astro";
-import { techStackTabsMetadata, UiuxTab, FrontendTab, BackendTab, InfraTab, MobileTab } from "./tabs";
-
-const tabs = techStackTabsMetadata.map((tab) => ({
-  key: tab.key,
-  label: tab.label,
-}));
+import styles from './TechStack.module.css';
 ---
 
-<section class={styles.section}>
-  <div class={styles.container}>
-    <div class={styles.header}>
-      <h2 class={styles.title}>Nuestro Stack Tecnológico de Clase Mundial</h2>
-      <p class={styles.subtitle}>
-        Utilizamos las herramientas más confiables y escalables para tu futuro.
-      </p>
+<section class={styles.metrics}>
+  <h2 class={styles.title}>
+    Ingeniería de software respaldada por resultados.
+  </h2>
 
-      <Tabs tabs={tabs} defaultTab="uiux" tabId="techstack">
-        <TabPanel tabKey="uiux" tabId="techstack">
-          <UiuxTab />
-        </TabPanel>
-        <TabPanel tabKey="frontend" tabId="techstack">
-          <FrontendTab />
-        </TabPanel>
-        <TabPanel tabKey="backend" tabId="techstack">
-          <BackendTab />
-        </TabPanel>
-        <TabPanel tabKey="infra" tabId="techstack">
-          <InfraTab />
-        </TabPanel>
-        <TabPanel tabKey="mobile" tabId="techstack">
-          <MobileTab />
-        </TabPanel>
-      </Tabs>
+  <p class={styles.description}>
+    Diseñamos soluciones robustas para empresas que no pueden permitirse fallos.
+  </p>
+
+  <div class={styles.metricsGrid}>
+    <div class={styles.metric}>
+      <strong>+500K</strong>
+      <span>Transacciones</span>
+    </div>
+
+    <div class={styles.metric}>
+      <strong>&lt; 200ms</strong>
+      <span>Latencia</span>
+    </div>
+
+    <div class={styles.metric}>
+      <strong>99.99%</strong>
+      <span>Disponibilidad</span>
+    </div>
+
+    <div class={styles.metric}>
+      <strong>24/7</strong>
+      <span>Monitoreo</span>
     </div>
   </div>
 </section>
