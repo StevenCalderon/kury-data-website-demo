@@ -8,6 +8,8 @@
   gap: var(--spacing-3);
   flex-wrap: nowrap;
   padding: 1rem 0rem 3rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tabButton {
@@ -52,6 +54,8 @@
     padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .tabsList::-webkit-scrollbar {
