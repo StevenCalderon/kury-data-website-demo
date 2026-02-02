@@ -224,7 +224,7 @@
   flex-direction: column;
   gap: 8px;
   border-radius: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
 }
 
 .form > .formGroup:nth-of-type(3) .label {
@@ -264,13 +264,13 @@
   line-height: 18px;
   color: #596387;
   margin: 0;
-  padding: 0;
+  padding: 10px 0; /* Padding superior e inferior para separar del textarea y botón */
   width: 100%; /* Ancho completo para que el texto no se corte */
   max-width: 400px; /* Límite para que no sea demasiado ancho */
-  height: 18px;
+  height: auto;
   flex-shrink: 0;
   opacity: 1;
-  min-height: 18px; /* Garantiza que siempre reserve el espacio */
+  min-height: 38px; /* Ajustado para incluir el padding (18px + 10px arriba + 10px abajo) */
   white-space: nowrap; /* Evita que el texto se parta en varias líneas */
   overflow: visible; /* Permite que el texto sea visible */
 }
@@ -474,7 +474,7 @@ textarea:-internal-autofill-selected {
     width: 100%;
     height: auto;
     min-height: auto;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
   }
 
   .textarea {
@@ -598,7 +598,7 @@ textarea:-internal-autofill-selected {
     width: 100%;
     height: auto;
     min-height: auto;
-    margin-bottom: 8px;
+    margin-bottom: 22px;
   }
 
   .textarea {
@@ -720,7 +720,7 @@ textarea:-internal-autofill-selected {
   .form > .formGroup:nth-of-type(3) {
     width: 100%;
     height: 164px;
-    margin-bottom: 8px;
+    margin-bottom: 24px;
   }
 
   .textarea {
