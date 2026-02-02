@@ -1,11 +1,6 @@
 
 .section {
-  padding: var(--spacing-24) var(--spacing-6);
-  background: radial-gradient(
-    circle at top,
-     #1e40af 0%
-     #020617 85%
-  );
+  padding: 96px 24px 0px 24px;
 }
 
 .container {
