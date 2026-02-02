@@ -1,9 +1,6 @@
-/* ContactForm.module.css - Estilos del formulario de contacto */
-
 /* Sección principal */
 .section {
   padding: var(--spacing-24) var(--spacing-6);
-  background-color: var(--color-form-bg);
   position: relative;
 }
 
