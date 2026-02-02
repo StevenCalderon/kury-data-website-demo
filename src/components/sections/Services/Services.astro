@@ -95,7 +95,7 @@ const services = [
     const paginationEl = paginationNode as HTMLElement;
     const totalCards = track.children.length;
 
-    // Breakpoints y cantidad detarjetas caben por vista
+    // Breakpoints and amount of cards per view
     function getViewportConfig() {
       const w = window.innerWidth;
       if (w <= 480) return { cardsPerView: 1, gap: 16 };

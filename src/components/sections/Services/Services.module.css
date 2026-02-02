@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-/* Efecto de profundidad*/
+/* Depth effect*/
 .section::before {
   content: '';
   position: absolute;
@@ -59,7 +59,7 @@
   margin: 0 auto;
 }
 
-/* Wrapper del carrusel */
+/* Wrapper of the carousel */
 .carouselWrapper {
   max-width: 1400px;
   margin: 0 auto;
@@ -81,9 +81,9 @@
   will-change: transform; 
 }
 
-/* Tarjeta de servicios: individual */
+/* Service card: individual */
 .serviceCard {
-  flex: 0 0 calc((100% - 72px) / 4); /* 4 tarjetas por vista: (100% - 3 gaps de 24px) / 4 */
+  flex: 0 0 calc((100% - 72px) / 4); /* 4 cards per view: (100% - 3 gaps of 24px) / 4 */
   min-width: 0; 
 
   backdrop-filter: blur(30px) saturate(180%);
@@ -240,7 +240,6 @@
   margin-top: 32px;
 }
 
-/* Puntos de paginación */
 .paginationDot {
   width: 12px;
   height: 12px;
@@ -269,7 +268,7 @@
 /* Responsive: Tablet */
 @media (max-width: 1024px) {
   .serviceCard {
-    flex: 0 0 calc((100% - 48px) / 3); /* 3 tarjetas por vista: (100% - 2 gaps de 24px) / 3 */
+    flex: 0 0 calc((100% - 48px) / 3); /* 3 cards per view: (100% - 2 gaps of 24px) / 3 */
   }
   
   .title {
@@ -289,7 +288,7 @@
   }
   
   .serviceCard {
-    flex: 0 0 calc((100% - 24px) / 2); /* 2 tarjetas por vista: (100% - 1 gap de 24px) / 2 */
+    flex: 0 0 calc((100% - 24px) / 2); /* 2 cards per view: (100% - 1 gap of 24px) / 2 */
   }
   
   .title {
@@ -314,10 +313,10 @@
   
 }
 
-/* Responsive: Mobile pequeño */
+/* Responsive: Mobile small */
 @media (max-width: 480px) {
   .serviceCard {
-    flex: 0 0 100%; /* 1 tarjeta por vista */
+    flex: 0 0 100%; /* 1 card per view */
   }
   
   .carouselTrack {
