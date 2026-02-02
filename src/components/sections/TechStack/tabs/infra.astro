@@ -1,0 +1,64 @@
+---
+import TechStackTabContent from "../TechStackTabContent.astro";
+import type { TechStackApp, TechStackPerson } from "./types";
+
+export const tabKey = "infra";
+export const tabLabel = "Infraestructura";
+
+const apps: TechStackApp[] = [
+  { title: "AWS", image: "/images/icons/aws-logo.svg" },
+  { title: "Docker", image: "/images/icons/docker-logo.svg" },
+  { title: "Kubernetes", image: "/images/icons/protopie.png" },
+  { title: "CI/CD", image: "/images/icons/slack.png" },
+];
+
+const people: TechStackPerson[] = [
+  {
+    name: "DevOps Engineer",
+    avatar: "/images/people/persona.png",
+    position: {
+      top: "100px",
+      left: "-35px",
+      background: "#ffdc7a",
+      borderColor: "#ffc219",
+      arrow: {
+        position: "right",
+        offset: "-32px",
+        top: "52%",
+        rotation: 22,
+        clipPath: "polygon(0 15%, 100% 50%, 0 85%)",
+      },
+    },
+  },
+  {
+    name: "Cloud Architect",
+    avatar: "/images/people/persona.png",
+    position: {
+      top: "180px",
+      right: "-35px",
+      background: "#93fff6",
+      borderColor: "#4ae9d9",
+      arrow: {
+        position: "left",
+        offset: "-32px",
+        top: "52%",
+        rotation: -22,
+        clipPath: "polygon(100% 15%, 0 50%, 100% 85%)",
+      },
+    },
+  },
+];
+
+const heading = "Infraestructura en la Nube.";
+const text =
+  "Gestionamos infraestructura cloud escalable y segura. Utilizamos las mejores prácticas de DevOps para garantizar alta disponibilidad, seguridad y rendimiento óptimo.";
+const image = "/images/movil.png";
+---
+
+<TechStackTabContent
+  heading={heading}
+  text={text}
+  apps={apps}
+  image={image}
+  people={people}
+/>

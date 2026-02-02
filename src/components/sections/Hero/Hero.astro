@@ -1,23 +1,34 @@
 ---
-import styles from './Hero.module.css';
-import Button from '../../ui/Button/Button.astro';
+import styles from "./Hero.module.css";
+import Button from "../../ui/Button/Button.astro";
+import HeroVisual from "./HeroVisual.astro";
 ---
 
 <section class={styles.section}>
   <div class={styles.container}>
-    <h1 class={styles.title}>
-      We build the 
-      <span class={styles.highlight}>AI-driven software</span> 
-      the future demands.
-    </h1>
-    
-    <p class={styles.subtitle}>
-      We integrate generative AI and predictive models into your digital ecosystem.
-    </p>
-    
-    <div class={styles.buttons}>
-      <Button href="/contact">Start Project</Button>
-      <Button href="/about" variant="secondary">Learn More</Button>
+    <div class={styles.grid}>
+      <div class={styles.leftSection}>
+        <div class={styles.content}>
+          <h1 class={styles.title}>
+            Creamos el
+            <span class={styles.highlight}>software impulsado por IA</span>
+            que el futuro exige.
+          </h1>
+
+          <p class={styles.subtitle}>
+            Integramos IA generativa y modelos predictivos en tu ecosistema digital
+            para transformar tus datos en decisiones estratégicas y ventajas
+            competitivas.
+          </p>
+
+          <div class={styles.buttons}>
+            <Button href="#contact">Iniciar Proyecto</Button>
+            <Button href="#services" variant="secondary">Ver Soluciones</Button>
+          </div>
+        </div>
+      </div>
+
+      <HeroVisual />
     </div>
   </div>
 </section>

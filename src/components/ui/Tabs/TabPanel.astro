@@ -1,0 +1,22 @@
+---
+import styles from "./TabPanel.module.css";
+
+interface Props {
+  tabKey: string;
+  tabId?: string;
+}
+
+const { tabKey, tabId = "tabs" } = Astro.props;
+---
+
+<div
+  class={styles.tabPanel}
+  role="tabpanel"
+  id={`${tabId}-panel-${tabKey}`}
+  aria-labelledby={`${tabId}-tab-${tabKey}`}
+  data-tab-panel={tabKey}
+  data-tab-active="false"
+  aria-hidden="true"
+>
+  <slot />
+</div>

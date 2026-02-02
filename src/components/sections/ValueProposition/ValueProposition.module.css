@@ -1,14 +1,129 @@
 .section {
   padding: var(--spacing-24) var(--spacing-6);
   display: flex;
-  align-items: center;
   justify-content: center;
-  min-height: 300px;
-  border-bottom: 1px solid var(--color-white-5);
+  align-items: center;
+}
+
+.valueContainer {
+
+  width: clamp(500px, 90%, var(--max-width));
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-8);
+
 }
 
 .title {
+ 
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-gray-400);
+  color: inherit;
+}
+
+/* TEXT */
+
+.textContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: var( --spacing-6);
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  
+}
+
+/* ITEMS */
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.itemImage {
+  height: 2rem;
+}
+
+.itemsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptionText {
+  font-size: clamp(var(--font-size-2xl) 2rem var(--font-size-4xl));
+}
+
+.percentageText{
+
+  font-weight: var(--font-weight-bold);
+  font-size: 2.25rem;
+
+}
+ 
+/* BUTTON */
+.buttonContainer {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.startButton {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  background-color: var(--color-primary-700);
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover{
+
+    background-color: var( --color-primary-600);
+  }
+}
+
+/* CHART */
+.chartContainer {
+  width: 40%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+}
+
+.chartContainer img {
+
+  width: 90%;
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 900px) {
+
+  .valueContainer {
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .textContainer, .chartContainer{
+
+    width: 100%;
+  }
+
+  .chartContainer {
+
+    justify-content: center;
+  }
+
+  .buttonContainer{
+
+    justify-content: center;
+  }
+
 }

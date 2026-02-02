@@ -1,7 +1,66 @@
 ---
-import styles from './ValueProposition.module.css';
+import styles from "./ValueProposition.module.css";
+
+/* DATA */
+const featureItems = [
+  { percentage: "72%", description: "Reducción de costos operativos." },
+  { percentage: "72%", description: "Reducción de costos operativos." },
+  { percentage: "72%", description: "Reducción de costos operativos." },
+];
+
+const scaleValues = ["100%", "80%", "60%", "40%", "20%", "0%"];
+
+const barClasses = [
+  styles.barOne,
+  styles.barTwo,
+  styles.barThree,
+];
+
 ---
 
 <section class={styles.section}>
-  <h2 class={styles.title}>ValueProposition</h2>
+  <div class={styles.valueContainer}>
+
+    <!-- TEXT -->
+    <div class={styles.textContainer}>
+      <div class={styles.textContent}>
+
+        <h2 class={styles.title}>
+          Convertimos tus ideas en productos escalables a velocidad récord
+        </h2>
+        <p class={styles.parrafoValueTexto}>
+          Muchos proyectos mueren en la fase de desarrollo por ser lentos,
+          costosos o tecnológicamente obsoletos antes de nacer.
+        </p>
+      </div>
+
+      <!-- ITEMS -->
+      <div class={styles.itemsContainer}>
+        {featureItems.map((item) => (
+          <div class={styles.item}>
+            <img
+              class={styles.itemImage}
+              src="/images/ValuePropositionImg/checkImg.png"
+              alt=""
+            />
+            <div class={styles.itemText}>
+              <p class={styles.percentageText}>{item.percentage}</p>
+              <p class={styles.descriptionText}>{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class={styles.buttonContainer}>
+        <a href="#" class={styles.startButton}>Comenzar mi proyecto</a>
+      </div>
+
+    </div>
+
+    <div class={styles.chartContainer}>
+      <img src="/images/ValuePropositionImg/graph.png" alt="">
+    </div>
+
+  </div>
 </section>
+
