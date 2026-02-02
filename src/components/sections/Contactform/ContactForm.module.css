@@ -1,0 +1,746 @@
+/* ContactForm.module.css - Estilos del formulario de contacto */
+
+/* Sección principal */
+.section {
+  padding: var(--spacing-24) var(--spacing-6);
+  background-color: var(--color-form-bg);
+  position: relative;
+}
+
+/* Contenedor principal con layout flex */
+.container {
+  max-width: 1273px;
+  width: 100%;
+  height: auto;
+  min-height: 610px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Columna izquierda - Ilustración */
+
+.leftColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 520px;
+  height: 489.23px;
+  flex-shrink: 0;
+}
+
+.illustration {
+  width: 520px;
+  height: 489.23px;
+  object-fit: contain;
+  display: none; /* Oculta por defecto, se muestra en tablet y desktop */
+}
+
+/* Columna derecha - Formulario */
+
+.formColumn {
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  flex-shrink: 0;
+}
+
+/* Encabezado del formulario */
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 620px;
+}
+
+.title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  color: var(--color-white);
+  margin: 0;
+}
+
+.description {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  color: var(--color-gray-400);
+  margin: 0;
+}
+
+/* Formulario */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  width: 100%;
+  max-width: 620px;
+}
+
+/* Campo de Nombre */
+.form > .formGroup:first-of-type {
+  width: 100%;
+  height: auto;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.form > .formGroup:first-of-type .label {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: var(--color-label-text);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.form > .formGroup:first-of-type .input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 16px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-white);
+  background-color: var(--color-input-bg) !important;
+  border: 1px solid var(--color-input-border);
+  border-radius: 8px;
+  outline: none;
+  transition: all var(--transition-normal);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Fila de Empresa y Presupuesto */
+.formRow {
+  width: 100%;
+  height: auto;
+  min-height: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Campo Empresa */
+.formRow .formGroup:first-child {
+  width: 100%;
+  height: auto;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formRow .formGroup:first-child .label {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: var(--color-label-text);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.formRow .formGroup:first-child .input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 16px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-white);
+  background-color: var(--color-input-bg) !important;
+  border: 1px solid var(--color-input-border);
+  border-radius: 8px;
+  outline: none;
+  transition: all var(--transition-normal);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Campo Presupuesto */
+.formRow .formGroup:last-child {
+  width: 100%;
+  height: auto;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formRow .formGroup:last-child .label {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: var(--color-label-text);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.formRow .formGroup:last-child .select {
+  width: 100%;
+  height: 48px;
+  padding: 12px 16px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-gray-500);
+  background-color: var(--color-input-bg) !important;
+  border: 1px solid var(--color-input-border);
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  transition: all var(--transition-normal);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%23A8ACBF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 48px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Campo de Mensaje (Textarea) */
+.form > .formGroup:nth-of-type(3) {
+  width: 100%;
+  height: auto;
+  min-height: 164px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.form > .formGroup:nth-of-type(3) .label {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: var(--color-label-text);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.textarea {
+  width: 100%;
+  height: 120px;
+  padding: 12px 16px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-white);
+  background-color: var(--color-input-bg) !important;
+  border: 1px solid var(--color-input-border);
+  border-radius: 8px;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  transition: all var(--transition-normal);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Mensaje de validación (siempre visible, reserva espacio para no mover el botón) */
+.validationMessage {
+  display: block;
+  font-family: Poppins, var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #596387;
+  margin: 0;
+  padding: 10px 0; /* Padding superior e inferior para separar del textarea y botón */
+  width: 100%; /* Ancho completo para que el texto no se corte */
+  max-width: 400px; /* Límite para que no sea demasiado ancho */
+  height: auto;
+  flex-shrink: 0;
+  opacity: 1;
+  min-height: 38px; /* Ajustado para incluir el padding (18px + 10px arriba + 10px abajo) */
+  white-space: nowrap; /* Evita que el texto se parta en varias líneas */
+  overflow: visible; /* Permite que el texto sea visible */
+}
+
+/* Estilos generales de campos */
+
+/* Placeholder */
+.input::placeholder,
+.textarea::placeholder,
+.select::placeholder {
+  color: var(--color-gray-500);
+  opacity: 1;
+}
+
+/* Borde azul al hacer focus */
+.input:focus,
+.select:focus,
+.textarea:focus,
+.form > .formGroup:first-of-type .input:focus,
+.formRow .formGroup:first-child .input:focus,
+.formRow .formGroup:last-child .select:focus,
+.form > .formGroup:nth-of-type(3) .textarea:focus {
+  border-color: var(--color-button-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0, 66, 255, 0.1) !important;
+}
+
+/* Eliminar el fondo azul del autocompletado del navegador (Chrome/Safari) */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active,
+.textarea:-webkit-autofill,
+.textarea:-webkit-autofill:hover,
+.textarea:-webkit-autofill:focus,
+.textarea:-webkit-autofill:active,
+.select:-webkit-autofill,
+.select:-webkit-autofill:hover,
+.select:-webkit-autofill:focus,
+.select:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-white) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-input-bg) inset !important;
+  box-shadow: 0 0 0px 1000px var(--color-input-bg) inset !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  transition: background-color 0s 50000s, color 0s 50000s !important;
+  caret-color: var(--color-white) !important;
+  border: 1px solid var(--color-input-border) !important;
+}
+
+/* Eliminar el fondo azul del autocompletado (Firefox) */
+.input:-moz-autofill,
+.textarea:-moz-autofill,
+.select:-moz-autofill {
+  background-color: transparent !important;
+  color: var(--color-white) !important;
+  box-shadow: 0 0 0px 1000px var(--color-input-bg) inset !important;
+  filter: none !important;
+}
+
+/* Ocultar botones de autocompletado de Chrome */
+.input::-webkit-contacts-auto-fill-button,
+.input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+/* Forzar estilos en campos autocompletados */
+input:-internal-autofill-selected,
+textarea:-internal-autofill-selected {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--color-white) !important;
+}
+
+/* Botón de envío */
+
+.submitButton {
+  width: 182px;
+  height: 50px;
+  padding: 12px 32px;
+  background: var(--color-button-blue);
+  color: var(--color-white);
+  border: none;
+  border-radius: 100px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+}
+
+.submitButton:hover {
+  background: var(--color-button-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 66, 255, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+/* Responsive - Móvil (< 768px) */
+
+@media (max-width: 767px) {
+  .section {
+    padding: var(--spacing-12) var(--spacing-4);
+  }
+
+  .container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    gap: 0;
+  }
+
+  /* Ocultar ilustración en móvil */
+  .leftColumn {
+    display: none !important;
+  }
+
+  .illustration {
+    display: none !important;
+  }
+
+  .formColumn {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    gap: 24px;
+  }
+
+  .heading {
+    width: 100%;
+    gap: 16px;
+  }
+
+  .title {
+    font-size: var(--font-size-3xl);
+    line-height: 1.2;
+  }
+
+  .description {
+    font-size: 16px;
+    line-height: 140%;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  /* Campo Nombre */
+  .form > .formGroup:first-of-type {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 20px;
+  }
+
+  .form > .formGroup:first-of-type .input {
+    width: 100%;
+    height: 48px;
+  }
+
+  /* Empresa y Presupuesto en columna */
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 20px;
+  }
+
+  .formRow .formGroup {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+  }
+
+  .formRow .formGroup:first-child .input {
+    width: 100%;
+    height: 48px;
+  }
+
+  .formRow .formGroup:last-child .select {
+    width: 100%;
+    height: 48px;
+  }
+
+  /* Campo Mensaje */
+  .form > .formGroup:nth-of-type(3) {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 20px;
+  }
+
+  .textarea {
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+  }
+
+  /* Botón */
+  .submitButton {
+    width: 100%;
+    max-width: 182px;
+    height: 50px;
+  }
+}
+
+/* Responsive - Tablet (768px - 1023px) */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section {
+    padding: var(--spacing-16) var(--spacing-6);
+  }
+
+  .container {
+    flex-direction: column-reverse; /* Formulario arriba, imagen abajo */
+    width: 100%;
+    max-width: 750px;
+    height: auto;
+    min-height: auto;
+    gap: var(--spacing-16);
+    padding: 0 var(--spacing-6);
+  }
+
+  /* Mostrar ilustración abajo del formulario */
+  .leftColumn {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    order: 2;
+  }
+
+  .illustration {
+    display: block !important;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+  }
+
+  .formColumn {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    gap: 28px;
+    order: 1;
+  }
+
+  .heading {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .title {
+    font-size: var(--font-size-4xl);
+    line-height: 1.15;
+  }
+
+  .description {
+    font-size: 18px;
+    line-height: 130%;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  /* Campo Nombre */
+  .form > .formGroup:first-of-type {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 22px;
+  }
+
+  .form > .formGroup:first-of-type .input {
+    width: 100%;
+    height: 48px;
+  }
+
+  /* Empresa y Presupuesto en fila */
+  .formRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 22px;
+  }
+
+  .formRow .formGroup {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+  }
+
+  .formRow .formGroup:first-child .input {
+    width: 100%;
+    height: 48px;
+  }
+
+  .formRow .formGroup:last-child .select {
+    width: 100%;
+    height: 48px;
+  }
+
+  /* Campo Mensaje */
+  .form > .formGroup:nth-of-type(3) {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 22px;
+  }
+
+  .textarea {
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+  }
+
+  /* Botón */
+  .submitButton {
+    width: 182px;
+    height: 50px;
+  }
+}
+
+/* Responsive - Desktop (1024px en adelante) */
+
+@media (min-width: 1024px) {
+  .section {
+    padding: var(--spacing-24) var(--spacing-6);
+  }
+
+  .container {
+    flex-direction: row;
+    max-width: 1273px;
+    width: 100%;
+    height: auto;
+    min-height: 610px;
+    gap: 40px;
+    padding: 0 var(--spacing-6);
+    justify-content: space-between;
+  }
+
+  /* Ilustración a la izquierda */
+  .leftColumn {
+    display: flex;
+    width: 520px;
+    height: auto;
+    min-height: 489.23px;
+    flex-shrink: 0;
+    order: 1;
+  }
+
+  .illustration {
+    display: block !important;
+    width: 520px;
+    height: 489.23px;
+    object-fit: contain;
+  }
+
+  /* Formulario a la derecha */
+  .formColumn {
+    width: 100%;
+    max-width: 620px;
+    height: auto;
+    gap: 32px;
+    flex-shrink: 0;
+    order: 2;
+  }
+
+  .heading {
+    width: 100%;
+    max-width: 620px;
+    gap: 24px;
+  }
+
+  .title {
+    font-size: var(--font-size-5xl);
+    line-height: 1.1;
+  }
+
+  .description {
+    font-size: 20px;
+    line-height: 100%;
+  }
+
+  .form {
+    width: 100%;
+    max-width: 620px;
+  }
+
+  /* Campo Nombre */
+  .form > .formGroup:first-of-type {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 24px;
+  }
+
+  .form > .formGroup:first-of-type .input {
+    width: 100%;
+    height: 48px;
+  }
+
+  /* Fila de Empresa y Presupuesto */
+  .formRow {
+    grid-template-columns: 298px 298px;
+    gap: 24px;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 24px;
+  }
+
+  .formRow .formGroup {
+    width: 298px;
+    height: 80px;
+  }
+
+  .formRow .formGroup:first-child .input {
+    width: 298px;
+    height: 48px;
+  }
+
+  .formRow .formGroup:last-child .select {
+    width: 298px;
+    height: 48px;
+  }
+
+  /* Campo Mensaje */
+  .form > .formGroup:nth-of-type(3) {
+    width: 100%;
+    height: 164px;
+    margin-bottom: 24px;
+  }
+
+  .textarea {
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+  }
+
+  /* Botón */
+  .submitButton {
+    width: 182px;
+    height: 50px;
+  }
+}
+
+/* Responsive - Desktop Grande (1280px+) */
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1273px;
+    margin: 0 auto;
+  }
+}
