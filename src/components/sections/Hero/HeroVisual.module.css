@@ -252,6 +252,10 @@
     backdrop-filter: blur(8px);
     border-radius: 0.5rem;
   }
+
+  .processArrow {
+    transform: rotate(-90deg);
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -274,7 +278,7 @@
     left: var(--spacing-4);
     width: auto;
     max-width: 400px;
-    perspective: 600px;
+    perspective: 2000px;
     perspective-origin: left center;
     margin-top: 0;
     padding: 0;
@@ -342,8 +346,8 @@
   }
 
   .processIcon {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.8rem;
+    height: 3.8rem;
     border-radius: 1.25rem;
   }
 
@@ -375,7 +379,7 @@
     left: -2%;
     width: auto;
     max-width: none;
-    perspective: 600px;
+    perspective: 2000px;
     perspective-origin: left center;
     margin-top: 0;
   }
@@ -402,8 +406,8 @@
   }
 
   .processIcon {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.8rem;
+    height: 3.8rem;
     border-radius: 1.25rem;
   }
 

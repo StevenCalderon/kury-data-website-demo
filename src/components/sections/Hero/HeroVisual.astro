@@ -4,29 +4,29 @@ import styles from "./HeroVisual.module.css";
 const process = [
   {
     title: "Figma",
-    image: "/images/icons/figma-logo.svg"
+    image: "/images/icons/figma-logo.svg",
   },
   {
     title: "Cursor",
-    image: "/images/icons/cursor-logo.svg"
+    image: "/images/icons/cursor-logo.svg",
   },
   {
     title: "Docker",
-    image: "/images/icons/docker-logo.svg"
+    image: "/images/icons/docker-logo.svg",
   },
   {
     title: "Supabase",
-    image: "/images/icons/supabase.svg"
+    image: "/images/icons/supabase.svg",
   },
   {
     title: "AWS",
-    image: "/images/icons/aws-logo.svg"
+    image: "/images/icons/aws-logo.svg",
   },
   {
     title: "Check",
-    image: "/images/icons/check-logo.svg"
+    image: "/images/icons/check-logo.svg",
   },
-]
+];
 
 const rustCode = `pub fn kury_sol_exec(id: Sig) -> Result<Ok, Err> {
   let sol = solana::connect(id).ok()?;
@@ -51,34 +51,43 @@ const rustCode = `pub fn kury_sol_exec(id: Sig) -> Result<Ok, Err> {
   <div class={styles.imageContainer}>
     <img src="/images/hero-image.svg" alt="Hero Image" />
   </div>
-  
+
   <div class={styles.codeContainer}>
-    <pre class={styles.code}>
-      <code class="language-rust" id="code-display"></code>
+    <pre
+      class={styles.code}>
+      <code class="language-rust" id="code-display" />
     </pre>
   </div>
-  
+
   <div class={styles.processContainer}>
-    {process.map((item, index) => (
-      <div class={styles.processItem} title={item.title}>
-        <div class={styles.processIcon}>
-          <img src={item.image} alt={item.title} />
+    {
+      process.map((item, index) => (
+        <div class={styles.processItem} title={item.title}>
+          <div class={styles.processIcon}>
+            <img src={item.image} alt={item.title} />
+          </div>
+          {index < process.length - 1 && (
+            <img
+              src="/images/icons/conector.svg"
+              alt=""
+              class={styles.processArrow}
+            />
+          )}
         </div>
-        {index < process.length - 1 && (
-          <img src="/images/icons/conector.svg" alt="" class={styles.processArrow} />
-        )}
-      </div>
-    ))}
+      ))
+    }
   </div>
 </div>
 
 <script>
-  (function() {
-    const prismCore = document.createElement('script');
-    prismCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js';
-    prismCore.onload = function() {
-      const prismRust = document.createElement('script');
-      prismRust.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js';
+  (function () {
+    const prismCore = document.createElement("script");
+    prismCore.src =
+      "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js";
+    prismCore.onload = function () {
+      const prismRust = document.createElement("script");
+      prismRust.src =
+        "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js";
       document.head.appendChild(prismRust);
     };
     document.head.appendChild(prismCore);
@@ -86,9 +95,9 @@ const rustCode = `pub fn kury_sol_exec(id: Sig) -> Result<Ok, Err> {
 </script>
 
 <script is:inline define:vars={{ rustCode }}>
-  (function() {
+  (function () {
     function sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
     async function waitForPrism(maxAttempts = 100) {
@@ -102,7 +111,7 @@ const rustCode = `pub fn kury_sol_exec(id: Sig) -> Result<Ok, Err> {
 
     async function waitForRustLanguage(maxAttempts = 100) {
       let attempts = 0;
-      while ((!window.Prism?.languages?.rust) && attempts < maxAttempts) {
+      while (!window.Prism?.languages?.rust && attempts < maxAttempts) {
         await sleep(100);
         attempts++;
       }
@@ -111,21 +120,22 @@ const rustCode = `pub fn kury_sol_exec(id: Sig) -> Result<Ok, Err> {
 
     async function typeHighlightedCode(targetElement, code) {
       if (!(await waitForPrism())) {
-        console.error('Prism Core no se cargó');
+        console.error("Prism Core no se cargó");
         targetElement.textContent = code;
         return;
       }
 
       if (!(await waitForRustLanguage())) {
-        console.error('Prism Rust no se cargó');
+        console.error("Prism Rust no se cargó");
         targetElement.textContent = code;
         return;
       }
 
-      const tempPre = document.createElement('pre');
-      tempPre.style.cssText = 'position: absolute; left: -9999px; visibility: hidden;';
-      
-      const realPre = targetElement.closest('pre');
+      const tempPre = document.createElement("pre");
+      tempPre.style.cssText =
+        "position: absolute; left: -9999px; visibility: hidden;";
+
+      const realPre = targetElement.closest("pre");
       if (realPre) {
         const computedStyle = window.getComputedStyle(realPre);
         tempPre.style.fontFamily = computedStyle.fontFamily;
@@ -135,56 +145,65 @@ const rustCode = `pub fn kury_sol_exec(id: Sig) -> Result<Ok, Err> {
         tempPre.style.margin = computedStyle.margin;
         tempPre.style.whiteSpace = computedStyle.whiteSpace;
       }
-      
-      const tempCode = document.createElement('code');
-      tempCode.className = 'language-rust';
+
+      const tempCode = document.createElement("code");
+      tempCode.className = "language-rust";
       tempCode.textContent = code;
       tempPre.appendChild(tempCode);
       document.body.appendChild(tempPre);
-      
+
       window.Prism.highlightElement(tempCode);
-      
+
       void tempPre.offsetHeight;
       const finalHeight = tempPre.offsetHeight;
-      
-      const codePre = targetElement.closest('pre');
+
+      const codePre = targetElement.closest("pre");
       const codeContainer = codePre?.parentElement;
-      
+
       if (codePre && codeContainer) {
         codePre.style.cssText = `height: ${finalHeight}px; min-height: ${finalHeight}px; max-height: ${finalHeight}px; overflow: hidden;`;
         targetElement.style.cssText = `max-height: ${finalHeight}px; overflow: hidden; display: block;`;
         codeContainer.style.cssText = `height: ${finalHeight}px; min-height: ${finalHeight}px;`;
-        
         void codePre.offsetHeight;
         void codeContainer.offsetHeight;
         void targetElement.offsetHeight;
       }
-      
-      await new Promise(resolve => requestAnimationFrame(resolve));
-      
+
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+
       const nodes = Array.from(tempCode.childNodes);
-      targetElement.innerHTML = '';
-      
+      targetElement.innerHTML = "";
+
       for (const node of nodes) {
         targetElement.appendChild(node.cloneNode(true));
-        const nodeText = node.textContent || '';
-        const delay = /^\s+$/.test(nodeText) ? 8 : 30;
+        const nodeText = node.textContent || "";
+        const delay = /^\s+$/.test(nodeText)
+          ? TYPING_DELAY_WHITESPACE_MS
+          : TYPING_DELAY_CHAR_MS;
         await sleep(delay);
       }
-      
+
       tempPre.remove();
     }
 
+    const LOOP_DELAY_MS = 500;
+    const TYPING_DELAY_WHITESPACE_MS = 15;
+    const TYPING_DELAY_CHAR_MS = 80;
+
     async function init() {
-      const codeElement = document.getElementById('code-display');
-      if (codeElement) {
-        await sleep(300);
+      const codeElement = document.getElementById("code-display");
+      if (!codeElement) return;
+
+      await sleep(300);
+
+      while (true) {
         await typeHighlightedCode(codeElement, rustCode);
+        await sleep(LOOP_DELAY_MS);
       }
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
     } else {
       init();
     }
