@@ -1,9 +1,7 @@
 /* Layout general */
 .wrapper {
-    width: 100%;
     /* Ajusta este max-width según el ancho de tu sitio web */
-    max-width: 1400px; 
-    margin: 0 auto;
+    margin: 0 4rem;
     padding: 20px;
     box-sizing: border-box;
 }

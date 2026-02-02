@@ -1,9 +1,6 @@
-/* ContactForm.module.css - Estilos del formulario de contacto */
-
 /* Sección principal */
 .section {
   padding: var(--spacing-24) var(--spacing-6);
-  background-color: var(--color-form-bg);
   position: relative;
 }
 
@@ -505,7 +502,6 @@ textarea:-internal-autofill-selected {
     height: auto;
     min-height: auto;
     gap: var(--spacing-16);
-    padding: 0 var(--spacing-6);
   }
 
   /* Mostrar ilustración abajo del formulario */
@@ -628,7 +624,6 @@ textarea:-internal-autofill-selected {
     height: auto;
     min-height: 610px;
     gap: 40px;
-    padding: 0 var(--spacing-6);
     justify-content: space-between;
   }
 

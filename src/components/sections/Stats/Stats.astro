@@ -1,7 +1,40 @@
 ---
-import styles from './Stats.module.css';
+import styles from "./Stats.module.css";
+import Tabs from "../../ui/Tabs/Tabs.astro";
+import TabPanel from "../../ui/Tabs/TabPanel.astro";
+import { techStackTabsMetadata, UiuxTab, FrontendTab, BackendTab, InfraTab, MobileTab } from "./tabs";
+
+const tabs = techStackTabsMetadata.map((tab) => ({
+  key: tab.key,
+  label: tab.label,
+}));
 ---
 
-<section class={styles.section}>
-  <h2 class={styles.title}>Stats</h2>
+<section id="nosotros" class={styles.section}>
+  <div class={styles.container}>
+    <div class={styles.header}>
+      <h2 class={styles.title}>Nuestro Stack Tecnológico de Clase Mundial</h2>
+      <p class={styles.subtitle}>
+        Utilizamos las herramientas más confiables y escalables para tu futuro.
+      </p>
+
+      <Tabs tabs={tabs} defaultTab="uiux" tabId="techstack">
+        <TabPanel tabKey="uiux" tabId="techstack">
+          <UiuxTab />
+        </TabPanel>
+        <TabPanel tabKey="frontend" tabId="techstack">
+          <FrontendTab />
+        </TabPanel>
+        <TabPanel tabKey="backend" tabId="techstack">
+          <BackendTab />
+        </TabPanel>
+        <TabPanel tabKey="infra" tabId="techstack">
+          <InfraTab />
+        </TabPanel>
+        <TabPanel tabKey="mobile" tabId="techstack">
+          <MobileTab />
+        </TabPanel>
+      </Tabs>
+    </div>
+  </div>
 </section>
