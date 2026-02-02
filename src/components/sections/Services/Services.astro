@@ -42,10 +42,10 @@ const services = [
 
 ---
 
-<section id={styles.presentationServices} class={styles.section}>
+<section class={styles.section}>
   <div class={styles.worldImage}>
   </div>
-  <div class={styles.titleContainer}>
+  <div  id="servicios" class={styles.titleContainer}>
     <h2 class={styles.title}>Diseñamos la Próxima Generación de Software</h2>
     <p class={styles.descriptionServices}>
       Conectamos los desafíos empresariales complejos con soluciones digitales escalables, utilizando arquitecturas de vanguardia para construir hoy el futuro de tu empresa.
@@ -98,10 +98,10 @@ const services = [
     // Breakpoints and amount of cards per view
     function getViewportConfig() {
       const w = window.innerWidth;
-      if (w <= 480) return { cardsPerView: 1, gap: 16 };
-      if (w <= 768) return { cardsPerView: 2, gap: 24 };
-      if (w <= 1024) return { cardsPerView: 3, gap: 24 };
-      return { cardsPerView: 4, gap: 24 };
+      if (w <= 480) return { cardsPerView: 1, gap: 20 };
+      if (w <= 768) return { cardsPerView: 2, gap: 28 };
+      if (w <= 1024) return { cardsPerView: 3, gap: 28 };
+      return { cardsPerView: 4, gap: 28 };
     }
 
     let currentGroup = 0;
