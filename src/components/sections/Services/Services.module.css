@@ -286,6 +286,11 @@
   .section {
     padding: 60px 0;
   }
+
+  .titleContainer,
+  .carouselWrapper {
+    width: 100%;
+  }
   
   .serviceCard {
     flex: 0 0 calc((100% - 28px) / 2); /* 2 cards per view: (100% - 1 gap of 28px) / 2 */
