@@ -47,15 +47,14 @@
 @media (max-width: 767px) {
   .tabsList {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: flex-start;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-bottom: 8px;
+    padding: 4px 4px 12px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
   }
 
   .tabsList::-webkit-scrollbar {
@@ -63,7 +62,20 @@
   }
 
   .tabButton {
-    padding: 6px 18px;
+    padding: 8px 18px;
     font-size: 13px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabsList {
+    gap: 8px;
+    padding: 4px 2px 12px;
+  }
+
+  .tabButton {
+    padding: 6px 14px;
+    font-size: 12px;
   }
 }

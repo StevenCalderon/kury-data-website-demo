@@ -5,6 +5,47 @@
   padding: 120px 64px;
 }
 
+@media (max-width: 1024px) {
+  .section {
+    padding: 80px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 48px 16px;
+  }
+
+  .grid {
+    gap: var(--spacing-8);
+  }
+
+  .apps {
+    gap: 12px;
+    margin: var(--spacing-6) 0;
+  }
+
+  .appIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .appIcon img {
+    width: 52px;
+    height: 46px;
+  }
+
+  .glass {
+    padding: 16px 12px;
+  }
+}
+
 /* =====================================================
    HEADER
 ===================================================== */
@@ -25,6 +66,13 @@
   align-items: center;
   margin: 0 4rem;
   gap: var(--spacing-24);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    margin: 0 2rem;
+    gap: var(--spacing-16);
+  }
 }
 
 /* =====================================================
@@ -248,14 +296,11 @@
    RESPONSIVE
 ===================================================== */
 @media (max-width: 767px) {
-
   .grid {
     grid-template-columns: 1fr;
-    gap: 56px;
-  }
-
-  .tabs::-webkit-scrollbar {
-    display: none;
+    gap: var(--spacing-12);
+    margin: 0;
+    /* Order: content first, then phone visual (natural reading flow on mobile) */
   }
 
   .badge {
@@ -268,29 +313,33 @@
     display: none;
   }
 
+  .badgeArrow {
+    display: none;
+  }
+
   .glass {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px 16px;
+  }
+
+  .mockup {
+    max-width: min(360px, 100%);
   }
 
   .header {
     align-items: stretch;
   }
 
-  .tabs {
-    justify-content: center;
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    flex-wrap: wrap;
+  .title {
+    font-size: clamp(1.75rem, 5vw, 2.2rem);
+    padding-inline: 0;
   }
 
-  .tabs::-webkit-scrollbar {
-    display: none;
+  .subtitle {
+    font-size: var(--font-size-base);
+    padding-inline: 0;
   }
 }
 
